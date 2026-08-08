@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Bob - Python Personal Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            🤖 BOB
+        </div>
+
+        <button onclick="showPage('home')">
+            🏠 Home
+        </button>
+
+        <button onclick="showPage('chat')">
+            💬 Chat
+        </button>
+
+        <button onclick="showPage('calculator')">
+            🧮 Calculator
+        </button>
+
+        <button onclick="showPage('datetime')">
+            📅 Date & Time
+        </button>
+
+        <button onclick="showPage('converter')">
+            🔄 Converter
+        </button>
+
+        <button onclick="showPage('memory')">
+            🧠 Memory
+        </button>
+
+        <button onclick="showPage('notes')">
+            📝 Notes
+        </button>
+
+        <button onclick="showPage('todo')">
+            ✅ To-Do
+        </button>
+
+        <button onclick="showPage('games')">
+            🎮 Games
+        </button>
+
+        <button onclick="showPage('fun')">
+            😂 Fun
+        </button>
+
+        <button onclick="showPage('manual')">
+            🐍 Python Manual
+        </button>
+
+        <button onclick="showPage('help')">
+            ❓ Help
+        </button>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="content">
+
+
+        <!-- HOME -->
+
+        <section id="home" class="page active">
+
+            <h1>🤖 Bob</h1>
+
+            <h2>Python Personal Assistant</h2>
+
+            <p>
+                Welcome! Choose something from the menu.
+            </p>
+
+        </section>
+
+
+        <!-- CHAT -->
+
+        <section id="chat" class="page">
+
+            <h1>💬 Chat with Bob</h1>
+
+            <div
+                id="chatOutput"
+                class="chat-output"
+            ></div>
+
+            <div class="chat-input">
+
+                <input
+                    id="chatInput"
+                    placeholder="Talk to Bob..."
+                    onkeydown="if(event.key === 'Enter') sendChat()"
+                >
+
+                <button onclick="sendChat()">
+                    Send
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- CALCULATOR -->
+
+        <section id="calculator" class="page">
+
+            <h1>🧮 Calculator</h1>
+
+            <div class="calculator">
+
+                <input
+                    id="num1"
+                    type="number"
+                    placeholder="First number"
+                >
+
+                <select id="operation">
+
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="%">%</option>
+                    <option value="//">//</option>
+                    <option value="**">Power</option>
+
+                </select>
+
+                <input
+                    id="num2"
+                    type="number"
+                    placeholder="Second number"
+                >
+
+                <button onclick="calculate()">
+                    Calculate
+                </button>
+
+            </div>
+
+            <h2 id="calcResult">
+                Result will appear here.
+            </h2>
+
+        </section>
+
+
+        <!-- DATE TIME -->
+
+        <section id="datetime" class="page">
+
+            <h1>📅 Date & Time</h1>
+
+            <div
+                id="clock"
+                class="clock"
+            ></div>
+
+        </section>
+
+
+        <!-- CONVERTER -->
+
+        <section id="converter" class="page">
+
+            <h1>🔄 Unit Converter</h1>
+
+            <select id="conversion">
+
+                <option value="km-miles">
+                    Kilometers → Miles
+                </option>
+
+                <option value="miles-km">
+                    Miles → Kilometers
+                </option>
+
+                <option value="kg-lb">
+                    Kilograms → Pounds
+                </option>
+
+                <option value="lb-kg">
+                    Pounds → Kilograms
+                </option>
+
+                <option value="c-f">
+                    Celsius → Fahrenheit
+                </option>
+
+                <option value="f-c">
+                    Fahrenheit → Celsius
+                </option>
+
+            </select>
+
+            <input
+                id="conversionValue"
+                type="number"
+                placeholder="Enter value"
+            >
+
+            <button onclick="convertUnits()">
+                Convert
+            </button>
+
+            <h2 id="conversionResult">
+                Result
+            </h2>
+
+        </section>
+
+
+        <!-- MEMORY -->
+
+        <section id="memory" class="page">
+
+            <h1>🧠 Memory</h1>
+
+            <input
+                id="nameInput"
+                placeholder="Your name"
+            >
+
+            <button onclick="saveName()">
+                Save Name
+            </button>
+
+            <hr>
+
+            <input
+                id="memoryInput"
+                placeholder="Something Bob should remember"
+            >
+
+            <button onclick="addMemory()">
+                Remember
+            </button>
+
+            <ul id="memoryList"></ul>
+
+            <button onclick="clearMemory()">
+                Clear Memory
+            </button>
+
+        </section>
+
+
+        <!-- NOTES -->
+
+        <section id="notes" class="page">
+
+            <h1>📝 Notes</h1>
+
+            <input
+                id="noteInput"
+                placeholder="Write a note..."
+            >
+
+            <button onclick="addNote()">
+                Add Note
+            </button>
+
+            <ul id="notesList"></ul>
+
+        </section>
+
+
+        <!-- TODO -->
+
+        <section id="todo" class="page">
+
+            <h1>✅ To-Do List</h1>
+
+            <input
+                id="taskInput"
+                placeholder="New task..."
+            >
+
+            <button onclick="addTask()">
+                Add Task
+            </button>
+
+            <ul id="taskList"></ul>
+
+        </section>
+
+
+        <!-- GAMES -->
+
+        <section id="games" class="page">
+
+            <h1>🎮 Games</h1>
+
+            <div class="game-buttons">
+
+                <button onclick="startGuessGame()">
+                    🎯 Number Guessing
+                </button>
+
+                <button onclick="startRPS()">
+                    ✊ Rock Paper Scissors
+                </button>
+
+            </div>
+
+
+            <!-- GUESSING GAME -->
+
+            <div id="guessGame">
+
+                <h2>🎯 Number Guessing</h2>
+
+                <p>
+                    Guess a number between 1 and 100.
+                </p>
+
+                <input
+                    id="guessInput"
+                    type="number"
+                >
+
+                <button onclick="makeGuess()">
+                    Guess
+                </button>
+
+                <p id="guessResult"></p>
+
+            </div>
+
+
+            <!-- RPS -->
+
+            <div id="rpsGame">
+
+                <h2>✊ Rock Paper Scissors</h2>
+
+                <h3 id="rpsRound">
+                    Round 1 / 5
+                </h3>
+
+                <div class="rps-buttons">
+
+                    <button onclick="playRPS('rock')">
+                        ✊ Rock
+                    </button>
+
+                    <button onclick="playRPS('paper')">
+                        📄 Paper
+                    </button>
+
+                    <button onclick="playRPS('scissors')">
+                        ✌️ Scissors
+                    </button>
+
+                </div>
+
+                <h3 id="rpsResult">
+                    Choose your move!
+                </h3>
+
+                <p id="rpsScore">
+                    You: 0 | Bob: 0 | Draws: 0
+                </p>
+
+                <div id="rpsHistory"></div>
+
+                <button onclick="startRPS()">
+                    🔄 New Match
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- FUN -->
+
+        <section id="fun" class="page">
+
+            <h1>😂 Fun & Random</h1>
+
+            <button onclick="joke()">
+                😂 Joke
+            </button>
+
+            <button onclick="dice()">
+                🎲 Dice
+            </button>
+
+            <button onclick="coin()">
+                🪙 Coin
+            </button>
+
+            <button onclick="randomNumber()">
+                🔢 Random Number
+            </button>
+
+            <h2 id="funResult"></h2>
+
+        </section>
+
+
+        <!-- PYTHON MANUAL -->
+
+        <section id="manual" class="page">
+
+            <h1>🐍 Python Manual</h1>
+
+            <div class="manual">
+
+                <div id="manualList"></div>
+
+                <div
+                    id="manualInfo"
+                    class="manual-info"
+                >
+                    Select a Python term.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- HELP -->
+
+        <section id="help" class="page">
+
+            <h1>❓ Help</h1>
+
+            <div class="help">
+
+                <h2>Bob - Python Personal Assistant</h2>
+
+                <p>
+                    Bob is a Python learning project converted
+                    into a web application.
+                </p>
+
+                <h3>Features</h3>
+
+                <ul>
+
+                    <li>Chat</li>
+                    <li>Calculator</li>
+                    <li>Date & Time</li>
+                    <li>Unit Converter</li>
+                    <li>Memory</li>
+                    <li>Notes</li>
+                    <li>To-Do List</li>
+                    <li>Games</li>
+                    <li>Fun</li>
+                    <li>Python Manual</li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

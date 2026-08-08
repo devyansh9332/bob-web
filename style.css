@@ -1,0 +1,255 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111827;
+    color: #f3f4f6;
+}
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 240px;
+    background: #0f172a;
+    padding: 20px;
+    border-right: 1px solid #334155;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 7px;
+    border: none;
+    border-radius: 8px;
+    background: #1e293b;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.sidebar button:hover {
+    background: #334155;
+}
+
+
+/* CONTENT */
+
+.content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 15px;
+}
+
+
+/* INPUTS */
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #475569;
+    border-radius: 7px;
+    background: #1e293b;
+    color: white;
+    margin: 5px;
+}
+
+button {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+
+/* CHAT */
+
+.chat-output {
+    height: 400px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+.chat-input {
+    display: flex;
+    margin-top: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+}
+
+
+/* CALCULATOR */
+
+.calculator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+
+/* CLOCK */
+
+.clock {
+    font-size: 45px;
+    font-weight: bold;
+    margin-top: 50px;
+}
+
+
+/* LISTS */
+
+ul {
+    max-width: 700px;
+}
+
+li {
+    background: #1e293b;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+
+/* GAMES */
+
+.game-buttons {
+    margin-bottom: 30px;
+}
+
+#guessGame,
+#rpsGame {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.rps-buttons {
+    margin: 20px 0;
+}
+
+.rps-buttons button {
+    font-size: 18px;
+    padding: 15px 25px;
+}
+
+#rpsHistory {
+    background: #111827;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    min-height: 100px;
+}
+
+
+/* MANUAL */
+
+.manual {
+    display: flex;
+    gap: 20px;
+    min-height: 500px;
+}
+
+#manualList {
+    width: 230px;
+}
+
+.manual-button {
+    width: 100%;
+    padding: 10px;
+    margin: 3px 0;
+    text-align: left;
+    background: #1e293b;
+}
+
+.manual-info {
+    flex: 1;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 25px;
+    white-space: pre-wrap;
+}
+
+
+/* HELP */
+
+.help {
+    max-width: 700px;
+    line-height: 1.7;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .app {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .manual {
+        flex-direction: column;
+    }
+
+    #manualList {
+        width: 100%;
+    }
+
+}
