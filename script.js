@@ -624,6 +624,265 @@ function clearManualSearch() {
     loadTopics(selectedLanguage);
 }
 
+
+// ---------------- FUN & RANDOM EXTENSIONS ----------------
+
+const funJokes = [
+    "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
+    "Why was the Python programmer cold? He left his Windows open! 😂",
+    "There are 10 kinds of people: those who understand binary and those who don't.",
+    "Why did the programmer quit? Because he didn't get arrays! 😂",
+    "A SQL query walks into a bar and asks: Can I JOIN you? 😂",
+    "Why do programmers hate nature? It has too many bugs! 🐛",
+    "I would tell you a UDP joke, but you might not get it."
+];
+
+const riddles = [
+    ["I speak without a mouth and hear without ears. What am I?", "An echo."],
+    ["What has keys but can't open locks?", "A keyboard."],
+    ["What gets wetter as it dries?", "A towel."],
+    ["What has a face and two hands but no arms or legs?", "A clock."],
+    ["What can travel around the world while staying in one corner?", "A stamp."]
+];
+
+const facts = [
+    "A group of flamingos is called a flamboyance. 🦩",
+    "The first computer bug was famously associated with a moth found in a relay. 🐛",
+    "Python was named after Monty Python, not the snake. 🐍",
+    "CSS stands for Cascading Style Sheets.",
+    "HTML describes structure; CSS describes presentation; JavaScript adds behavior.",
+    "A standard IPv4 address has 32 bits."
+];
+
+const fortunes = [
+    "A small step today will save you a lot of work tomorrow.",
+    "You are closer than you think. Keep going. 🚀",
+    "Your next bug is probably hiding in a missing semicolon—or a missing assumption. 😄",
+    "Consistency will beat motivation when motivation disappears.",
+    "Today is a good day to learn one thing properly."
+];
+
+const compliments = [
+    "Your curiosity is one of your strongest tools. 🧠",
+    "You ask questions instead of pretending to understand. That's a developer skill.",
+    "Your persistence is stronger than your bugs. 💪",
+    "You are building something instead of only watching tutorials. Respect. 👨‍💻"
+];
+
+const codingChallenges = [
+    "Write a Python program that checks whether a number is prime.",
+    "Create a C program that reverses a string without using strrev().",
+    "Write a C++ program that finds the largest element in a vector.",
+    "Write a Java method that counts vowels in a String.",
+    "Use JavaScript map() to square every number in an array.",
+    "Create an HTML form containing name, email and password fields.",
+    "Build a CSS card using Flexbox and make it responsive."
+];
+
+const randomWords = ["keyboard","compiler","function","variable","network","browser","python","algorithm","database","terminal","programmer","debugging"];
+const randomNames = ["Alex","Sam","Jordan","Aarav","Riya","Kabir","Maya","Dev","Noah","Aisha"];
+const randomChoices = ["Code","Study","Take a break","Play a game","Read documentation","Build something","Fix an old bug"];
+const colorNames = ["red","blue","green","purple","orange","pink","cyan","gold","teal","indigo"];
+
+function setFun(html) {
+    document.getElementById("funResult").innerHTML = html;
+}
+
+function joke(){ setFun(`<h2>😂 Joke</h2><p>${escapeHTML(funJokes[Math.floor(Math.random()*funJokes.length)])}</p>`); }
+function riddle(){
+    const r=riddles[Math.floor(Math.random()*riddles.length)];
+    setFun(`<h2>🧠 Riddle</h2><p>${escapeHTML(r[0])}</p><details><summary>Show answer</summary><p>${escapeHTML(r[1])}</p></details>`);
+}
+function funFact(){ setFun(`<h2>💡 Fun Fact</h2><p>${escapeHTML(facts[Math.floor(Math.random()*facts.length)])}</p>`); }
+function wouldYouRather(){
+    const q=[
+        ["Would you rather be able to code perfectly but never use Google?","OR","Use Google forever but never write bug-free code?"],
+        ["Would you rather know every programming language?","OR","Be world-class at one language?"],
+        ["Would you rather debug someone else's code?","OR","Debug your own code from 2 years ago? 💀"]
+    ][Math.floor(Math.random()*3)];
+    setFun(`<h2>🤔 Would You Rather?</h2><p>${escapeHTML(q[0])}</p><h3>${escapeHTML(q[1])}</h3><p>${escapeHTML(q[2])}</p>`);
+}
+function roastBob(){ setFun(`<h2>🔥 Roast Bob</h2><p>${["Bob has 2,000 lines of JavaScript and still thinks he's intelligent. 💀","Bob's AI is so advanced it can calculate 2 + 2… after asking for two inputs.","Bob doesn't have bugs. He has undocumented features. 😎"][Math.floor(Math.random()*3)]}</p>`); }
+function compliment(){ setFun(`<h2>💬 Bob says:</h2><p>${escapeHTML(compliments[Math.floor(Math.random()*compliments.length)])}</p>`); }
+function mood(){ setFun(`<h2>🎭 Random Mood</h2><p>${["😎 Chill","🔥 Motivated","🤓 Nerdy","😂 Chaotic","🧠 Focused","☕ Needs Coffee","🚀 Ready to build"][Math.floor(Math.random()*7)]}</p>`); }
+function fortune(){ setFun(`<h2>🔮 Fortune</h2><p>${escapeHTML(fortunes[Math.floor(Math.random()*fortunes.length)])}</p>`); }
+function magic8(){
+    const a=["Yes — definitely.","Signs point to yes.","Probably.","Ask again later.","Not sure.","Don't count on it.","Very unlikely.","Absolutely not. 😂"];
+    setFun(`<h2>🎱 Magic 8 Ball</h2><p>${escapeHTML(a[Math.floor(Math.random()*a.length)])}</p>`);
+}
+function codingChallenge(){ setFun(`<h2>💻 Coding Challenge</h2><p>${escapeHTML(codingChallenges[Math.floor(Math.random()*codingChallenges.length)])}</p>`); }
+function rollDice(sides){ setFun(`<h2>🎲 Dice Roll</h2><p>You rolled <strong>${Math.floor(Math.random()*sides)+1}</strong> on a d${sides}.</p>`); }
+function rollCustomDice(){
+    const sides=Number(prompt("How many sides? (2-100)"));
+    if(!Number.isInteger(sides)||sides<2||sides>100)return;
+    rollDice(sides);
+}
+function randomColor(){
+    const hex="#"+Math.floor(Math.random()*0xffffff).toString(16).padStart(6,"0");
+    setFun(`<h2>🎨 Random Color</h2><div style="width:100%;height:80px;border-radius:10px;background:${hex};border:1px solid #64748b"></div><p><strong>${hex}</strong></p>`);
+}
+function randomLetter(){ setFun(`<h2>🔤 Random Letter</h2><p style="font-size:45px">${String.fromCharCode(65+Math.floor(Math.random()*26))}</p>`); }
+function randomWord(){ setFun(`<h2>🔠 Random Word</h2><p>${randomWords[Math.floor(Math.random()*randomWords.length)]}</p>`); }
+function randomName(){ setFun(`<h2>👤 Random Name</h2><p>${randomNames[Math.floor(Math.random()*randomNames.length)]}</p>`); }
+function randomDate(){
+    const start=new Date(2000,0,1).getTime(), end=new Date(2035,11,31).getTime();
+    setFun(`<h2>📅 Random Date</h2><p>${new Date(start+Math.random()*(end-start)).toLocaleDateString("en-IN")}</p>`);
+}
+function randomTime(){
+    const h=String(Math.floor(Math.random()*24)).padStart(2,"0"), m=String(Math.floor(Math.random()*60)).padStart(2,"0"), s=String(Math.floor(Math.random()*60)).padStart(2,"0");
+    setFun(`<h2>⏱️ Random Time</h2><p>${h}:${m}:${s}</p>`);
+}
+function passwordGenerator(){
+    const chars="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
+    let pass="";
+    for(let i=0;i<16;i++) pass+=chars[Math.floor(Math.random()*chars.length)];
+    setFun(`<h2>🔐 Random Password</h2><pre>${escapeHTML(pass)}</pre><p>16 characters generated locally in your browser.</p>`);
+}
+function randomChoice(){ setFun(`<h2>🎯 Random Choice</h2><p>${escapeHTML(randomChoices[Math.floor(Math.random()*randomChoices.length)])}</p>`); }
+function slotMachine(){
+    const symbols=["🍒","🍋","🔔","⭐","💎","7️⃣"];
+    const a=symbols[Math.floor(Math.random()*symbols.length)],b=symbols[Math.floor(Math.random()*symbols.length)],c=symbols[Math.floor(Math.random()*symbols.length)];
+    const win=a===b&&b===c;
+    setFun(`<h2>🎰 Slot Machine</h2><p style="font-size:42px">${a} ${b} ${c}</p><h3>${win?"🎉 JACKPOT!":"Try again!"}</h3>`);
+}
+function headsTailsStreak(){
+    let streak=0;
+    while(Math.random()<0.5 && streak<100) streak++;
+    setFun(`<h2>🪙 Heads Streak</h2><p>You got <strong>${streak}</strong> consecutive Heads before Tails.</p>`);
+}
+function higherLower(){
+    const n=Math.floor(Math.random()*100)+1, next=Math.floor(Math.random()*100)+1;
+    setFun(`<h2>🃏 Higher or Lower</h2><p>Current card: <strong>${n}</strong></p><p>Next card is <strong>${next>n?"HIGHER ⬆️":next<n?"LOWER ⬇️":"EQUAL 🤝"}</strong> (${next}).</p>`);
+}
+function colorGuess(){
+    const target=colorNames[Math.floor(Math.random()*colorNames.length)];
+    const guess=prompt("Guess a color: red, blue, green, purple, orange, pink, cyan, gold, teal, indigo");
+    if(!guess)return;
+    setFun(`<h2>🎨 Color Guess</h2><p>Bob's color was <strong>${target}</strong>.</p><p>${guess.toLowerCase()===target?"🎉 Correct!":"❌ Not this time."}</p>`);
+}
+
+// Word Scramble
+let scrambleAnswer="";
+function startWordScramble(){
+    scrambleAnswer=randomWords[Math.floor(Math.random()*randomWords.length)];
+    let chars=scrambleAnswer.split("");
+    for(let i=chars.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[chars[i],chars[j]]=[chars[j],chars[i]];}
+    document.getElementById("scrambleWord").textContent=chars.join(" ");
+    document.getElementById("scrambleInput").value="";
+    document.getElementById("scrambleResult").textContent="";
+}
+function checkScramble(){
+    const guess=document.getElementById("scrambleInput").value.trim().toLowerCase();
+    document.getElementById("scrambleResult").textContent=guess===scrambleAnswer?"🎉 Correct!":"❌ Try again.";
+}
+
+// Math challenge
+let mathAnswer=null;
+function startMathChallenge(){
+    const a=Math.floor(Math.random()*20)+1,b=Math.floor(Math.random()*20)+1;
+    const ops=["+","-","*"],op=ops[Math.floor(Math.random()*ops.length)];
+    mathAnswer=op==="+"?a+b:op==="-"?a-b:a*b;
+    document.getElementById("mathQuestion").textContent=`${a} ${op} ${b} = ?`;
+    document.getElementById("mathAnswer").value="";
+    document.getElementById("mathResult").textContent="";
+}
+function checkMathChallenge(){
+    const value=Number(document.getElementById("mathAnswer").value);
+    document.getElementById("mathResult").textContent=value===mathAnswer?"🏆 Correct!":"❌ Wrong answer.";
+}
+
+// Reaction timer
+let reactionState="idle", reactionStart=0, reactionTimeout=null;
+function startReactionTimer(){
+    reactionState="waiting";
+    const btn=document.getElementById("reactionButton");
+    const status=document.getElementById("reactionStatus");
+    btn.textContent="Wait...";
+    status.textContent="Wait for GO... don't click yet!";
+    clearTimeout(reactionTimeout);
+    reactionTimeout=setTimeout(()=>{
+        reactionState="go"; reactionStart=performance.now();
+        btn.textContent="CLICK!";
+        status.textContent="GO! GO! GO!";
+    },1500+Math.random()*3500);
+}
+function reactionAction(){
+    if(reactionState==="idle"||reactionState==="go"&&false){startReactionTimer();return;}
+    if(reactionState==="waiting"){
+        reactionState="idle"; clearTimeout(reactionTimeout);
+        document.getElementById("reactionButton").textContent="Start";
+        document.getElementById("reactionStatus").textContent="Too early! 😅";
+        document.getElementById("reactionResult").textContent="Wait for GO next time.";
+        return;
+    }
+    if(reactionState==="go"){
+        const ms=Math.round(performance.now()-reactionStart);
+        reactionState="idle";
+        document.getElementById("reactionButton").textContent="Start";
+        document.getElementById("reactionStatus").textContent="Nice!";
+        document.getElementById("reactionResult").textContent=`⚡ Reaction time: ${ms} ms`;
+    }
+}
+
+// Tic-Tac-Toe
+let tttCells=Array(9).fill(""), tttActive=true;
+function newTicTacToe(){
+    tttCells=Array(9).fill("");tttActive=true;
+    const board=document.getElementById("tttBoard"); board.innerHTML="";
+    tttCells.forEach((_,i)=>{
+        const b=document.createElement("button");b.className="ttt-cell";b.onclick=()=>tttMove(i);board.appendChild(b);
+    });
+    document.getElementById("tttStatus").textContent="Your turn (X).";
+}
+function tttWinner(){
+    const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    for(const [a,b,c] of lines)if(tttCells[a]&&tttCells[a]===tttCells[b]&&tttCells[a]===tttCells[c])return tttCells[a];
+    return tttCells.every(Boolean)?"draw":null;
+}
+function renderTTT(){
+    document.querySelectorAll(".ttt-cell").forEach((b,i)=>b.textContent=tttCells[i]);
+}
+function tttMove(i){
+    if(!tttActive||tttCells[i])return;
+    tttCells[i]="X";renderTTT();
+    let w=tttWinner();if(w){finishTTT(w);return;}
+    const free=tttCells.map((x,i)=>x?null:i).filter(x=>x!==null);
+    if(!free.length)return;
+    const bot=free[Math.floor(Math.random()*free.length)];tttCells[bot]="O";renderTTT();
+    w=tttWinner();if(w)finishTTT(w);else document.getElementById("tttStatus").textContent="Your turn.";
+}
+function finishTTT(w){
+    tttActive=false;
+    document.getElementById("tttStatus").textContent=w==="X"?"🏆 You win!":w==="O"?"🤖 Bob wins!":"🤝 Draw!";
+}
+function ticTacToe(){showPage("fun");newTicTacToe();}
+
+// Bhagavad Gita random verse.
+// The original Sanskrit is public-domain. We use a small offline set here;
+// the complete 18-chapter / 700-verse text is linked for browsing.
+const gitaVerses = [
+{ref:"2.47",sanskrit:"कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",meaning:"Your focus is on your action, not on controlling its result."},
+{ref:"2.20",sanskrit:"न जायते म्रियते वा कदाचिन्नायं भूत्वा भविता वा न भूयः।\\nअजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",meaning:"The Self is described as unborn, eternal and not destroyed when the body is destroyed."},
+{ref:"4.7",sanskrit:"यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",meaning:"Whenever dharma declines and adharma rises, the Divine manifests."},
+{ref:"4.8",sanskrit:"परित्राणाय साधूनां विनाशाय च दुष्कृताम्।\\nधर्मसंस्थापनार्थाय सम्भवामि युगे युगे॥",meaning:"The Divine appears to protect the good, overcome wrongdoing and restore dharma."},
+{ref:"6.5",sanskrit:"उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",meaning:"One should lift oneself through one's own disciplined mind rather than letting oneself fall."},
+{ref:"9.22",sanskrit:"अनन्याश्चिन्तयन्तो मां ये जनाः पर्युपासते।\\nतेषां नित्याभियुक्तानां योगक्षेमं वहाम्यहम्॥",meaning:"Those who remain devoted with single-minded focus are assured of divine care."},
+{ref:"12.15",sanskrit:"यस्मान्नोद्विजते लोको लोकान्नोद्विजते च यः।\\nहर्षामर्षभयोद्वेगैर्मुक्तो यः स च मे प्रियः॥",meaning:"One who neither disturbs others nor is disturbed by them, and is free from agitation, is dear to the Divine."},
+{ref:"18.66",sanskrit:"सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\\nअहं त्वा सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",meaning:"The verse concludes with surrender to the Divine and the reassurance: do not grieve."}
+];
+
+function randomGitaVerse(){
+    const v=gitaVerses[Math.floor(Math.random()*gitaVerses.length)];
+    document.getElementById("gitaResult").innerHTML=`
+        <p class="gita-meta">Bhagavad Gita ${v.ref}</p>
+        <p class="gita-sanskrit">${escapeHTML(v.sanskrit).replace(/\n/g,"<br>")}</p>
+        <h3>Simple meaning</h3>
+        <p>${escapeHTML(v.meaning)}</p>
+        <p class="muted">This is a concise explanation, not a substitute for a traditional commentary.</p>
+    `;
+}
+
+
 // ---------------- INIT ----------------
 
 renderMemory();
@@ -633,3 +892,5 @@ loadLanguages();
 loadTopics("Python");
 startRPS();
 showPage("home");
+
+setTimeout(()=>{ try{ newTicTacToe(); startWordScramble(); startMathChallenge(); }catch(e){} }, 50);

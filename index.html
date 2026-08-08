@@ -180,15 +180,91 @@
         </section>
 
         <section id="fun" class="page">
-            <h1>😂 Fun & Random</h1>
-            <div class="card fun-buttons">
-                <button onclick="joke()">😂 Joke</button>
-                <button onclick="dice()">🎲 Dice</button>
-                <button onclick="coin()">🪙 Coin</button>
-                <button onclick="randomNumber()">🔢 Random Number</button>
-                <h2 id="funResult">Choose something!</h2>
-            </div>
-        </section>
+    <h1>😂 Fun & Random</h1>
+    <p>Games, generators, jokes, challenges and a random Bhagavad Gita verse.</p>
+
+    <div class="fun-grid">
+        <button onclick="joke()">😂 Joke</button>
+        <button onclick="riddle()">🧠 Riddle</button>
+        <button onclick="funFact()">💡 Fun Fact</button>
+        <button onclick="wouldYouRather()">🤔 Would You Rather</button>
+        <button onclick="roastBob()">🔥 Roast Bob</button>
+        <button onclick="compliment()">💬 Compliment</button>
+        <button onclick="mood()">🎭 Random Mood</button>
+        <button onclick="fortune()">🔮 Fortune</button>
+        <button onclick="magic8()">🎱 Magic 8 Ball</button>
+        <button onclick="codingChallenge()">💻 Coding Challenge</button>
+        <button onclick="rollDice(6)">🎲 d6</button>
+        <button onclick="rollDice(20)">🎲 d20</button>
+        <button onclick="rollCustomDice()">🎲 Custom Dice</button>
+        <button onclick="coin()">🪙 Coin Flip</button>
+        <button onclick="randomNumber()">🔢 Random Number</button>
+        <button onclick="randomColor()">🎨 Random Color</button>
+        <button onclick="randomLetter()">🔤 Random Letter</button>
+        <button onclick="randomWord()">🔠 Random Word</button>
+        <button onclick="randomName()">👤 Random Name</button>
+        <button onclick="randomDate()">📅 Random Date</button>
+        <button onclick="randomTime()">⏱️ Random Time</button>
+        <button onclick="passwordGenerator()">🔐 Password</button>
+        <button onclick="randomChoice()">🎯 Random Choice</button>
+        <button onclick="slotMachine()">🎰 Slot Machine</button>
+        <button onclick="startWordScramble()">🔤 Word Scramble</button>
+        <button onclick="startMathChallenge()">➗ Math Challenge</button>
+        <button onclick="startReactionTimer()">⚡ Reaction Timer</button>
+        <button onclick="higherLower()">🃏 Higher / Lower</button>
+        <button onclick="colorGuess()">🔴 Color Guess</button>
+        <button onclick="ticTacToe()">❌ Tic-Tac-Toe</button>
+        <button onclick="headsTailsStreak()">🪙 Streak</button>
+    </div>
+
+    <div class="fun-output card" id="funResult">
+        <h2>🎉 Pick something!</h2>
+        <p>Your result will appear here.</p>
+    </div>
+
+    <div class="gita-card">
+        <div class="gita-symbol">ॐ</div>
+        <h2>🕉️ Random Bhagavad Gita Shloka</h2>
+        <p class="muted">A random verse from a growing local collection. The original Sanskrit is public-domain; translations can have separate copyrights.</p>
+        <button onclick="randomGitaVerse()">📖 Show Random Shloka</button>
+        <a class="secondary-btn" href="https://www.bhagvadgita.in/" target="_blank" rel="noopener">📚 Browse All 700 Verses</a>
+        <div id="gitaResult" class="gita-result">
+            <p>Click the button to receive a verse.</p>
+        </div>
+    </div>
+
+    <div class="mini-game card">
+        <h2>🔤 Word Scramble</h2>
+        <p id="scrambleWord">Click Start.</p>
+        <button onclick="startWordScramble()">Start</button>
+        <input id="scrambleInput" placeholder="Unscramble the word..." onkeydown="if(event.key==='Enter') checkScramble()">
+        <button onclick="checkScramble()">Check</button>
+        <p id="scrambleResult"></p>
+    </div>
+
+    <div class="mini-game card">
+        <h2>⚡ Reaction Timer</h2>
+        <p id="reactionStatus">Press Start, then click when the screen tells you.</p>
+        <button id="reactionButton" onclick="reactionAction()">Start</button>
+        <p id="reactionResult"></p>
+    </div>
+
+    <div class="mini-game card">
+        <h2>➗ Math Challenge</h2>
+        <p id="mathQuestion">Click Start.</p>
+        <input id="mathAnswer" type="number" placeholder="Answer" onkeydown="if(event.key==='Enter') checkMathChallenge()">
+        <button onclick="startMathChallenge()">New</button>
+        <button onclick="checkMathChallenge()">Check</button>
+        <p id="mathResult"></p>
+    </div>
+
+    <div class="mini-game card">
+        <h2>❌ Tic-Tac-Toe</h2>
+        <div id="tttBoard" class="ttt-board"></div>
+        <p id="tttStatus">Your turn.</p>
+        <button onclick="newTicTacToe()">New Game</button>
+    </div>
+</section>
 
         <section id="manual" class="page">
             <h1>📚 Programming Manual</h1>
