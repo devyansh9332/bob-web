@@ -221,40 +221,6 @@ No `npm install` or build process is required.
 
 ---
 
-# 🌐 Deploy on Vercel
-
-Bob is a static web application, so it can be deployed directly to Vercel.
-
-## Method 1 — GitHub
-
-1. Push the project to GitHub.
-2. Open Vercel.
-3. Sign in with GitHub.
-4. Select **Add New → Project**.
-5. Import the `bob-web` repository.
-6. Select **Other** as the framework if required.
-7. Leave Build Command empty.
-8. Leave Output Directory empty.
-9. Click **Deploy**.
-
-Vercel will automatically deploy the website.
-
----
-
-# 🔄 Updating the Website
-
-After making changes:
-
-```bash
-git add .
-git commit -m "Update Bob"
-git push
-```
-
-If the GitHub repository is connected to Vercel, Vercel automatically deploys the new version.
-
----
-
 # 💾 Data Storage
 
 Bob currently uses browser **LocalStorage** for:
