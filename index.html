@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bob - Programming Assistant">
-    <title>Bob - Programming Assistant</title>
+    <meta name="description" content="Geeksy - Tech Community">
+    <title>Geeksy - Tech Community</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="app">
     <aside class="sidebar">
-        <div class="logo">🤖 BOB</div>
-        <div class="logo-subtitle">Programming Assistant</div>
+        <div class="logo">◉ Geeksy</div>
+        <div class="logo-subtitle">Tech Community</div>
 
         <button onclick="showPage('home')">🏠 Home</button>
         <button onclick="showPage('chat')">💬 Chat</button>
@@ -32,8 +32,8 @@
         <section id="home" class="page active">
             <div class="hero">
                 <div class="hero-icon">🤖</div>
-                <h1>Welcome to Bob</h1>
-                <h2>Programming Assistant</h2>
+                <h1>Welcome to Geeksy</h1>
+                <h2>Tech Community</h2>
                 <p>Chat, calculate, save notes, play games and learn programming languages.</p>
                 <div class="feature-grid">
                     <button onclick="showPage('chat')">💬 Chat</button>
@@ -45,11 +45,11 @@
         </section>
 
         <section id="chat" class="page">
-            <h1>💬 Chat with Bob</h1>
+            <h1>💬 Chat</h1>
             <div class="quick-responses">
                 <button onclick="quickChat('hello')">👋 Hello</button>
                 <button onclick="quickChat('how are you')">😊 How are you?</button>
-                <button onclick="quickChat('who are you')">🤖 Who are you?</button>
+                <button onclick="quickChat('who are you')">🤖 AI Assistant</button>
                 <button onclick="quickChat('tell me a joke')">😂 Tell me a joke</button>
                 <button onclick="quickChat('what is the time')">🕐 Time</button>
                 <button onclick="quickChat('Bhagavad Gita')">🕉️ Bhagavad Gita</button>
@@ -62,10 +62,10 @@
                 <button onclick="quickChat('good night')">🌙 Good night</button>
             </div>
             <div id="chatOutput" class="chat-output">
-                <div class="bot-message"><strong>Bob:</strong> Hi! I'm Bob. Ask me something or use a quick button. 👋</div>
+                <div class="bot-message"><strong>AI Assistant:</strong> Hi! I'm your AI assistant. Ask me something or use a quick button. 👋</div>
             </div>
             <div class="chat-input">
-                <input id="chatInput" placeholder="Talk to Bob..." onkeydown="if(event.key === 'Enter') sendChat()">
+                <input id="chatInput" placeholder="Ask the AI assistant..." onkeydown="if(event.key === 'Enter') sendChat()">
                 <button onclick="sendChat()">Send</button>
             </div>
         </section>
@@ -119,7 +119,7 @@
                 <h3>Your name</h3>
                 <input id="nameInput" placeholder="Your name">
                 <button onclick="saveName()">Save Name</button>
-                <h3>Things Bob should remember</h3>
+                <h3>Things the AI Assistant should remember</h3>
                 <input id="memoryInput" placeholder="Something to remember">
                 <button onclick="addMemory()">Remember</button>
                 <ul id="memoryList"></ul>
@@ -175,7 +175,7 @@
                     <button onclick="playRPS('scissors')">✌️ Scissors</button>
                 </div>
                 <h3 id="rpsResult">Choose your move!</h3>
-                <p id="rpsScore">You: 0 | Bob: 0 | Draws: 0</p>
+                <p id="rpsScore">You: 0 | AI: 0 | Draws: 0</p>
                 <div id="rpsHistory" class="history"></div>
                 <button onclick="startRPS()">🔄 New Match</button>
             </div>
@@ -190,7 +190,7 @@
         <button onclick="riddle()">🧠 Riddle</button>
         <button onclick="funFact()">💡 Fun Fact</button>
         <button onclick="wouldYouRather()">🤔 Would You Rather</button>
-        <button onclick="roastBob()">🔥 Roast Bob</button>
+        <button onclick="roastAssistant()">🔥 Roast AI</button>
         <button onclick="compliment()">💬 Compliment</button>
         <button onclick="mood()">🎭 Random Mood</button>
         <button onclick="fortune()">🔮 Fortune</button>
@@ -302,8 +302,8 @@
         <section id="help" class="page">
             <h1>❓ Help</h1>
             <div class="card help">
-                <h2>🤖 About Bob</h2>
-                <p>Bob is a browser-based programming assistant and learning project.</p>
+                <h2>🤖 About Geeksy</h2>
+                <p>Geeksy includes a browser-based AI assistant and programming learning tools.</p>
                 <h3>Features</h3>
                 <ul>
                     <li>Chat with quick responses</li>

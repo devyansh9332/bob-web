@@ -1,13 +1,13 @@
-# 🤖 Bob — Python Personal Assistant
+# 🤖 Geeksy — Tech Community & AI Assistant
 
-Bob is a simple personal assistant and Python learning project converted into a web application.
+Geeksy is a simple personal assistant and Python learning project converted into a web application.
 
 It provides useful tools, games, a chatbot, and an interactive Python manual — all inside one web interface.
 
 ## 🌐 Live Demo
 
 **Live Website:**
-(https://bob-web-navy.vercel.app/)
+(https://geeksy-navy.vercel.app/)
 
 ---
 
@@ -15,7 +15,7 @@ It provides useful tools, games, a chatbot, and an interactive Python manual —
 
 ### 💬 Chat
 
-Talk with Bob using simple messages.
+Talk with Geeksy using simple messages.
 
 Examples:
 
@@ -62,7 +62,7 @@ Supported conversions:
 Save:
 
 * Your name
-* Information Bob should remember
+* Information Geeksy should remember
 
 ### 📝 Notes
 
@@ -80,7 +80,7 @@ Guess a random number between 1 and 100.
 
 #### Rock Paper Scissors
 
-Play a five-round match against Bob.
+Play a five-round match against Geeksy.
 
 ```text
 Rock     beats Scissors
@@ -139,7 +139,7 @@ str()
 
 # 🛠️ Technologies
 
-Bob Web is built using:
+Geeksy is built using:
 
 * HTML5
 * CSS3
@@ -156,7 +156,7 @@ No external framework is required.
 # 📁 Project Structure
 
 ```text
-Bob-Web/
+Geeksy/
 │
 ├── index.html
 ├── style.css
@@ -175,7 +175,7 @@ Contains the design, layout, colors, buttons, responsive styling, and UI.
 
 ### `script.js`
 
-Contains Bob's functionality, games, calculator, chatbot, converter, memory, notes, to-do list, and Python Manual.
+Contains Geeksy's functionality, games, calculator, chatbot, converter, memory, notes, to-do list, and Python Manual.
 
 ### `README.md`
 
@@ -188,13 +188,13 @@ Project documentation.
 ## 1. Clone the repository
 
 ```bash
-git clone https://github.com/devyansh9332/bob-web.git
+git clone https://github.com/devyansh9332/geeksy.git
 ```
 
 ## 2. Enter the project
 
 ```bash
-cd bob-web
+cd geeksy
 ```
 
 ## 3. Start a local server
@@ -205,7 +205,7 @@ Using Python:
 python3 -m http.server 8000
 ```
 
-## 4. Open Bob
+## 4. Open Geeksy
 
 Open:
 
@@ -221,7 +221,7 @@ No `npm install` or build process is required.
 
 # 💾 Data Storage
 
-Bob currently uses browser **LocalStorage** for:
+Geeksy currently uses browser **LocalStorage** for:
 
 * Memory
 * Notes
@@ -236,7 +236,7 @@ Browser
    ↓
 LocalStorage
    ↓
-Bob's saved data
+Geeksy's saved data
 ```
 
 Different users have separate local data.
@@ -247,7 +247,7 @@ There is currently no online database or user account system.
 
 # 🔐 Privacy
 
-Bob does not currently require an account or send Memory, Notes, or To-Do data to a server.
+Geeksy does not currently require an account or send Memory, Notes, or To-Do data to a server.
 
 The saved information is stored locally in the browser.
 
@@ -257,7 +257,7 @@ Deleting browser site data may delete the saved information.
 
 # 🎯 Project Purpose
 
-Bob was created as a learning project to practice:
+Geeksy was created as a learning project to practice:
 
 * Python programming concepts
 * JavaScript
@@ -286,7 +286,7 @@ Select a term such as:
 print()
 ```
 
-and Bob explains its:
+and The AI assistant explains its:
 
 * Meaning
 * Syntax
@@ -297,7 +297,7 @@ and Bob explains its:
 
 # 🤝 Contributing
 
-Want to improve Bob?
+Want to improve Geeksy?
 
 1. Fork the repository.
 2. Create a new branch.
@@ -360,6 +360,6 @@ https://github.com/devyansh9332
 
 ---
 
-## ⭐ If you like Bob
+## ⭐ If you like Geeksy
 
 Give the repository a ⭐ on GitHub and feel free to improve it!
