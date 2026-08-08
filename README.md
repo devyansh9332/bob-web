@@ -352,7 +352,7 @@ This project is open for learning and personal use.
 
 # 👨‍💻 Author
 
-**Devansh**
+**SudoTerminal**
 
 GitHub:
 
