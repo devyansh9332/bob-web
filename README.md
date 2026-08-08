@@ -7,8 +7,7 @@ It provides useful tools, games, a chatbot, and an interactive Python manual —
 ## 🌐 Live Demo
 
 **Live Website:**
-https://bob-web.vercel.app
-
+(https://bob-web-navy.vercel.app/)
 > Replace the URL above with your actual Vercel URL.
 
 ---
