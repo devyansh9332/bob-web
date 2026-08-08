@@ -1,4 +1,9 @@
 // ============================================================
+// BOB WEB APP
+// ============================================================
+
+
+// ============================================================
 // PAGE NAVIGATION
 // ============================================================
 
@@ -10,9 +15,11 @@ function showPage(pageName) {
         page.classList.remove("active");
     });
 
-    document
-        .getElementById(pageName)
-        .classList.add("active");
+    const selectedPage = document.getElementById(pageName);
+
+    if (selectedPage) {
+        selectedPage.classList.add("active");
+    }
 }
 
 
@@ -33,11 +40,9 @@ function sendChat() {
     const output = document.getElementById("chatOutput");
 
     output.innerHTML +=
-        `<strong>You:</strong> ${message}<br>`;
+        `<strong>You:</strong> ${escapeHTML(message)}<br>`;
 
-    const response = botResponse(
-        message.toLowerCase()
-    );
+    const response = botResponse(message.toLowerCase());
 
     output.innerHTML +=
         `<strong>Bob:</strong> ${response}<br><br>`;
@@ -45,6 +50,18 @@ function sendChat() {
     output.scrollTop = output.scrollHeight;
 
     input.value = "";
+
+    input.focus();
+}
+
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
 }
 
 
@@ -65,7 +82,7 @@ function botResponse(message) {
             "I'm doing great! My code is running perfectly.",
 
         "who are you":
-            "I'm Bob, your Python personal assistant.",
+            "I'm Bob, your personal assistant.",
 
         "what is your name":
             "My name is Bob.",
@@ -91,35 +108,57 @@ function botResponse(message) {
         "i am bored":
             "Try one of the games! 🎮",
 
+        "im bored":
+            "Try one of the games! 🎮",
+
         "i am happy":
             "That's great to hear! 😄",
 
+        "im happy":
+            "That's great to hear! 😄",
+
         "i am sad":
+            "I'm sorry you're feeling that way. I hope things get better.",
+
+        "im sad":
             "I'm sorry you're feeling that way. I hope things get better.",
 
         "do you like python":
             "Of course! Python is what started me! 🐍",
 
         "good bot":
-            "Thank you! 😎"
+            "Thank you! 😎",
 
+        "bad bot":
+            "😭 I'll try to improve!"
     };
+
 
     if (responses[message]) {
         return responses[message];
     }
 
+
     if (message.includes("joke")) {
         return getJoke();
     }
 
+
     if (message.includes("time")) {
-        return new Date().toLocaleTimeString();
+
+        return new Date().toLocaleTimeString(
+            "en-IN"
+        );
     }
 
+
     if (message.includes("date")) {
-        return new Date().toLocaleDateString();
+
+        return new Date().toLocaleDateString(
+            "en-IN"
+        );
     }
+
 
     return "I don't understand that yet. Try something else.";
 }
@@ -131,60 +170,101 @@ function botResponse(message) {
 
 function calculate() {
 
-    const a = Number(
-        document.getElementById("num1").value
-    );
+    const num1 =
+        document.getElementById("num1").value;
 
-    const b = Number(
-        document.getElementById("num2").value
-    );
+    const num2 =
+        document.getElementById("num2").value;
 
-    const op =
+    const operation =
         document.getElementById("operation").value;
+
+
+    if (num1 === "" || num2 === "") {
+
+        document.getElementById(
+            "calcResult"
+        ).textContent =
+            "⚠️ Enter both numbers.";
+
+        return;
+    }
+
+
+    const a = Number(num1);
+    const b = Number(num2);
 
     let result;
 
-    if (op === "+") {
+
+    if (operation === "+") {
+
         result = a + b;
+
     }
 
-    else if (op === "-") {
+    else if (operation === "-") {
+
         result = a - b;
+
     }
 
-    else if (op === "*") {
+    else if (operation === "*") {
+
         result = a * b;
+
     }
 
-    else if (op === "/") {
+    else if (operation === "/") {
 
         if (b === 0) {
-            result = "Cannot divide by zero.";
+
+            result =
+                "Cannot divide by zero.";
+
         }
 
         else {
+
             result = a / b;
         }
     }
 
-    else if (op === "%") {
-        result = a % b;
-    }
-
-    else if (op === "//") {
+    else if (operation === "%") {
 
         if (b === 0) {
-            result = "Cannot divide by zero.";
+
+            result =
+                "Cannot divide by zero.";
+
         }
 
         else {
+
+            result = a % b;
+        }
+    }
+
+    else if (operation === "//") {
+
+        if (b === 0) {
+
+            result =
+                "Cannot divide by zero.";
+
+        }
+
+        else {
+
             result = Math.floor(a / b);
         }
     }
 
-    else if (op === "**") {
+    else if (operation === "**") {
+
         result = a ** b;
     }
+
 
     document.getElementById(
         "calcResult"
@@ -201,6 +281,7 @@ function updateClock() {
 
     const now = new Date();
 
+
     const date =
         now.toLocaleDateString(
             "en-IN",
@@ -211,13 +292,22 @@ function updateClock() {
             }
         );
 
-    const time =
-        now.toLocaleTimeString();
 
-    document.getElementById(
-        "clock"
-    ).innerHTML =
-        `${date}<br><br>${time}`;
+    const time =
+        now.toLocaleTimeString(
+            "en-IN"
+        );
+
+
+    const clock =
+        document.getElementById("clock");
+
+
+    if (clock) {
+
+        clock.innerHTML =
+            `${date}<br><br>${time}`;
+    }
 }
 
 
@@ -230,50 +320,91 @@ updateClock();
 
 
 // ============================================================
-// CONVERTER
+// UNIT CONVERTER
 // ============================================================
 
 function convertUnits() {
 
-    const value = Number(
+    const valueInput =
         document.getElementById(
             "conversionValue"
-        ).value
-    );
+        ).value;
+
+
+    if (valueInput === "") {
+
+        document.getElementById(
+            "conversionResult"
+        ).textContent =
+            "⚠️ Enter a value.";
+
+        return;
+    }
+
+
+    const value =
+        Number(valueInput);
+
 
     const type =
         document.getElementById(
             "conversion"
         ).value;
 
+
     let result;
+
 
     switch (type) {
 
         case "km-miles":
-            result = value * 0.621371;
+
+            result =
+                value * 0.621371;
+
             break;
+
 
         case "miles-km":
-            result = value * 1.60934;
+
+            result =
+                value * 1.60934;
+
             break;
+
 
         case "kg-lb":
-            result = value * 2.20462;
+
+            result =
+                value * 2.20462;
+
             break;
+
 
         case "lb-kg":
-            result = value * 0.453592;
+
+            result =
+                value * 0.453592;
+
             break;
+
 
         case "c-f":
-            result = (value * 9 / 5) + 32;
+
+            result =
+                (value * 9 / 5) + 32;
+
             break;
 
+
         case "f-c":
-            result = (value - 32) * 5 / 9;
+
+            result =
+                (value - 32) * 5 / 9;
+
             break;
     }
+
 
     document.getElementById(
         "conversionResult"
@@ -288,21 +419,29 @@ function convertUnits() {
 
 function saveName() {
 
-    const name =
+    const input =
         document.getElementById(
             "nameInput"
-        ).value.trim();
+        );
+
+
+    const name =
+        input.value.trim();
+
 
     if (!name) {
         return;
     }
+
 
     localStorage.setItem(
         "bobName",
         name
     );
 
+
     renderMemory();
+
 
     alert(
         `Nice to meet you, ${name}!`
@@ -317,12 +456,15 @@ function addMemory() {
             "memoryInput"
         );
 
+
     const value =
         input.value.trim();
+
 
     if (!value) {
         return;
     }
+
 
     let memory =
         JSON.parse(
@@ -331,14 +473,18 @@ function addMemory() {
             )
         ) || [];
 
+
     memory.push(value);
+
 
     localStorage.setItem(
         "bobMemory",
         JSON.stringify(memory)
     );
 
+
     input.value = "";
+
 
     renderMemory();
 }
@@ -351,23 +497,34 @@ function renderMemory() {
             "memoryList"
         );
 
+
+    if (!list) {
+        return;
+    }
+
+
     list.innerHTML = "";
+
 
     const name =
         localStorage.getItem(
             "bobName"
         );
 
+
     if (name) {
 
         const li =
             document.createElement("li");
 
+
         li.textContent =
             "Name: " + name;
 
+
         list.appendChild(li);
     }
+
 
     const memory =
         JSON.parse(
@@ -376,12 +533,16 @@ function renderMemory() {
             )
         ) || [];
 
+
     memory.forEach(item => {
 
         const li =
             document.createElement("li");
 
-        li.textContent = item;
+
+        li.textContent =
+            item;
+
 
         list.appendChild(li);
     });
@@ -394,9 +555,11 @@ function clearMemory() {
         "bobName"
     );
 
+
     localStorage.removeItem(
         "bobMemory"
     );
+
 
     renderMemory();
 }
@@ -416,12 +579,15 @@ function addNote() {
             "noteInput"
         );
 
+
     const note =
         input.value.trim();
+
 
     if (!note) {
         return;
     }
+
 
     let notes =
         JSON.parse(
@@ -430,14 +596,18 @@ function addNote() {
             )
         ) || [];
 
+
     notes.push(note);
+
 
     localStorage.setItem(
         "bobNotes",
         JSON.stringify(notes)
     );
 
+
     input.value = "";
+
 
     renderNotes();
 }
@@ -452,12 +622,18 @@ function deleteNote(index) {
             )
         ) || [];
 
-    notes.splice(index, 1);
+
+    notes.splice(
+        index,
+        1
+    );
+
 
     localStorage.setItem(
         "bobNotes",
         JSON.stringify(notes)
     );
+
 
     renderNotes();
 }
@@ -470,7 +646,14 @@ function renderNotes() {
             "notesList"
         );
 
+
+    if (!list) {
+        return;
+    }
+
+
     list.innerHTML = "";
+
 
     const notes =
         JSON.parse(
@@ -479,17 +662,32 @@ function renderNotes() {
             )
         ) || [];
 
+
     notes.forEach(
         (note, index) => {
 
             const li =
                 document.createElement("li");
 
-            li.innerHTML =
-                `${note}
-                <button onclick="deleteNote(${index})">
-                    Delete
-                </button>`;
+
+            li.textContent =
+                note;
+
+
+            const button =
+                document.createElement("button");
+
+
+            button.textContent =
+                "Delete";
+
+
+            button.onclick =
+                () => deleteNote(index);
+
+
+            li.appendChild(button);
+
 
             list.appendChild(li);
         }
@@ -501,7 +699,7 @@ renderNotes();
 
 
 // ============================================================
-// TODO
+// TODO LIST
 // ============================================================
 
 function addTask() {
@@ -511,12 +709,15 @@ function addTask() {
             "taskInput"
         );
 
+
     const task =
         input.value.trim();
+
 
     if (!task) {
         return;
     }
+
 
     let tasks =
         JSON.parse(
@@ -525,17 +726,24 @@ function addTask() {
             )
         ) || [];
 
+
     tasks.push({
+
         text: task,
+
         completed: false
+
     });
+
 
     localStorage.setItem(
         "bobTasks",
         JSON.stringify(tasks)
     );
 
+
     input.value = "";
+
 
     renderTasks();
 }
@@ -550,13 +758,16 @@ function completeTask(index) {
             )
         ) || [];
 
+
     tasks[index].completed =
         !tasks[index].completed;
+
 
     localStorage.setItem(
         "bobTasks",
         JSON.stringify(tasks)
     );
+
 
     renderTasks();
 }
@@ -571,12 +782,18 @@ function deleteTask(index) {
             )
         ) || [];
 
-    tasks.splice(index, 1);
+
+    tasks.splice(
+        index,
+        1
+    );
+
 
     localStorage.setItem(
         "bobTasks",
         JSON.stringify(tasks)
     );
+
 
     renderTasks();
 }
@@ -589,7 +806,14 @@ function renderTasks() {
             "taskList"
         );
 
+
+    if (!list) {
+        return;
+    }
+
+
     list.innerHTML = "";
+
 
     const tasks =
         JSON.parse(
@@ -598,25 +822,59 @@ function renderTasks() {
             )
         ) || [];
 
+
     tasks.forEach(
         (task, index) => {
 
             const li =
                 document.createElement("li");
 
+
             const status =
                 task.completed
                     ? "✓"
                     : "○";
 
+
             li.innerHTML =
-                `${status} ${task.text}
-                <button onclick="completeTask(${index})">
-                    Complete
-                </button>
-                <button onclick="deleteTask(${index})">
-                    Delete
-                </button>`;
+                `${status} ${escapeHTML(task.text)}`;
+
+
+            const completeButton =
+                document.createElement("button");
+
+
+            completeButton.textContent =
+                task.completed
+                    ? "Undo"
+                    : "Complete";
+
+
+            completeButton.onclick =
+                () => completeTask(index);
+
+
+            const deleteButton =
+                document.createElement("button");
+
+
+            deleteButton.textContent =
+                "Delete";
+
+
+            deleteButton.onclick =
+                () => deleteTask(index);
+
+
+            li.appendChild(
+                completeButton
+            );
+
+
+            li.appendChild(
+                deleteButton
+            );
+
 
             list.appendChild(li);
         }
@@ -631,59 +889,269 @@ renderTasks();
 // NUMBER GUESSING GAME
 // ============================================================
 
-let secretNumber = 0;
+let secretNumber = null;
+
+let guessAttempts = 0;
+
+let guessGameActive = false;
+
+
+// ------------------------------------------------------------
+// START NEW GAME
+// ------------------------------------------------------------
 
 function startGuessGame() {
+
+    // Generate number from 1 to 100
 
     secretNumber =
         Math.floor(
             Math.random() * 100
         ) + 1;
 
-    document.getElementById(
-        "guessResult"
-    ).textContent =
-        "New game started!";
-}
+
+    // Reset attempts
+
+    guessAttempts = 0;
 
 
-function makeGuess() {
+    // Activate game
 
-    const guess =
-        Number(
-            document.getElementById(
-                "guessInput"
-            ).value
+    guessGameActive = true;
+
+
+    // Clear input
+
+    const input =
+        document.getElementById(
+            "guessInput"
         );
+
+
+    if (input) {
+
+        input.value = "";
+
+        input.focus();
+    }
+
+
+    // Reset result
 
     const result =
         document.getElementById(
             "guessResult"
         );
 
-    if (!secretNumber) {
-        startGuessGame();
+
+    if (result) {
+
+        result.textContent =
+            "🎮 Game started! Make your first guess.";
     }
+
+
+    // Reset attempts display
+
+    const attempts =
+        document.getElementById(
+            "guessAttempts"
+        );
+
+
+    if (attempts) {
+
+        attempts.textContent =
+            "Attempts: 0";
+    }
+}
+
+
+// ------------------------------------------------------------
+// MAKE GUESS
+// ------------------------------------------------------------
+
+function makeGuess() {
+
+    // Game hasn't started
+
+    if (!guessGameActive) {
+
+        document.getElementById(
+            "guessResult"
+        ).textContent =
+            "⚠️ Click 'Start New Game' first.";
+
+        return;
+    }
+
+
+    const input =
+        document.getElementById(
+            "guessInput"
+        );
+
+
+    const guess =
+        Number(input.value);
+
+
+    // --------------------------------------------------------
+    // VALIDATION
+    // --------------------------------------------------------
+
+    if (
+        !Number.isInteger(guess) ||
+        guess < 1 ||
+        guess > 100
+    ) {
+
+        document.getElementById(
+            "guessResult"
+        ).textContent =
+            "⚠️ Enter a whole number between 1 and 100.";
+
+        input.focus();
+
+        return;
+    }
+
+
+    // Increase attempts
+
+    guessAttempts++;
+
+
+    document.getElementById(
+        "guessAttempts"
+    ).textContent =
+        `Attempts: ${guessAttempts}`;
+
+
+    // --------------------------------------------------------
+    // CORRECT ANSWER
+    // --------------------------------------------------------
+
+    if (guess === secretNumber) {
+
+        document.getElementById(
+            "guessResult"
+        ).textContent =
+            `🎉 CORRECT! You guessed it in ${guessAttempts} attempts!`;
+
+
+        // Stop game
+
+        guessGameActive = false;
+
+
+        input.value = "";
+
+
+        return;
+    }
+
+
+    // --------------------------------------------------------
+    // CALCULATE DISTANCE
+    // --------------------------------------------------------
+
+    const difference =
+        Math.abs(
+            guess - secretNumber
+        );
+
+
+    // --------------------------------------------------------
+    // TOO LOW
+    // --------------------------------------------------------
 
     if (guess < secretNumber) {
 
-        result.textContent =
-            "Too low! ⬇️";
+
+        // Difference 1-5
+
+        if (difference <= 5) {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "🔥 VERY CLOSE, BUT TOO LOW! Go a little higher.";
+        }
+
+
+        // Difference 6-10
+
+        else if (difference <= 10) {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "🟡 NEAR, BUT TOO LOW! Try a little higher.";
+        }
+
+
+        // Difference 11+
+
+        else {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "⬇️ TOO LOW! Try a higher number.";
+        }
     }
 
-    else if (guess > secretNumber) {
 
-        result.textContent =
-            "Too high! ⬆️";
-    }
+    // --------------------------------------------------------
+    // TOO HIGH
+    // --------------------------------------------------------
 
     else {
 
-        result.textContent =
-            "🎉 Correct! You won!";
 
-        secretNumber = 0;
+        // Difference 1-5
+
+        if (difference <= 5) {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "🔥 VERY CLOSE, BUT TOO HIGH! Go a little lower.";
+        }
+
+
+        // Difference 6-10
+
+        else if (difference <= 10) {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "🟡 NEAR, BUT TOO HIGH! Try a little lower.";
+        }
+
+
+        // Difference 11+
+
+        else {
+
+            document.getElementById(
+                "guessResult"
+            ).textContent =
+                "⬆️ TOO HIGH! Try a lower number.";
+        }
     }
+
+
+    // Clear input
+
+    input.value = "";
+
+
+    // Focus input
+
+    input.focus();
 }
 
 
@@ -692,10 +1160,17 @@ function makeGuess() {
 // ============================================================
 
 let rpsRound = 1;
+
 let rpsPlayerScore = 0;
+
 let rpsBobScore = 0;
+
 let rpsDraws = 0;
 
+
+// ------------------------------------------------------------
+// START NEW RPS MATCH
+// ------------------------------------------------------------
 
 function startRPS() {
 
@@ -707,26 +1182,62 @@ function startRPS() {
 
     rpsDraws = 0;
 
-    document.getElementById(
-        "rpsRound"
-    ).textContent =
-        "Round 1 / 5";
 
-    document.getElementById(
-        "rpsResult"
-    ).textContent =
-        "Choose your move!";
+    const round =
+        document.getElementById(
+            "rpsRound"
+        );
 
-    document.getElementById(
-        "rpsScore"
-    ).textContent =
-        "You: 0 | Bob: 0 | Draws: 0";
 
-    document.getElementById(
-        "rpsHistory"
-    ).innerHTML = "";
+    if (round) {
+
+        round.textContent =
+            "Round 1 / 5";
+    }
+
+
+    const result =
+        document.getElementById(
+            "rpsResult"
+        );
+
+
+    if (result) {
+
+        result.textContent =
+            "Choose your move!";
+    }
+
+
+    const score =
+        document.getElementById(
+            "rpsScore"
+        );
+
+
+    if (score) {
+
+        score.textContent =
+            "You: 0 | Bob: 0 | Draws: 0";
+    }
+
+
+    const history =
+        document.getElementById(
+            "rpsHistory"
+        );
+
+
+    if (history) {
+
+        history.innerHTML = "";
+    }
 }
 
+
+// ------------------------------------------------------------
+// PLAY RPS
+// ------------------------------------------------------------
 
 function playRPS(playerChoice) {
 
@@ -734,27 +1245,42 @@ function playRPS(playerChoice) {
         return;
     }
 
+
     const choices = [
         "rock",
         "paper",
         "scissors"
     ];
 
+
     const bobChoice =
         choices[
             Math.floor(
-                Math.random() * choices.length
+                Math.random() *
+                choices.length
             )
         ];
 
+
     let result;
+
+
+    // --------------------------------------------------------
+    // DRAW
+    // --------------------------------------------------------
 
     if (playerChoice === bobChoice) {
 
-        result = "DRAW 🤝";
+        result =
+            "DRAW 🤝";
 
         rpsDraws++;
     }
+
+
+    // --------------------------------------------------------
+    // PLAYER WIN
+    // --------------------------------------------------------
 
     else if (
 
@@ -779,27 +1305,46 @@ function playRPS(playerChoice) {
 
     ) {
 
-        result = "YOU WIN THIS ROUND! 🏆";
+        result =
+            "YOU WIN THIS ROUND! 🏆";
 
         rpsPlayerScore++;
     }
 
+
+    // --------------------------------------------------------
+    // BOB WIN
+    // --------------------------------------------------------
+
     else {
 
-        result = "BOB WINS THIS ROUND! 🤖";
+        result =
+            "BOB WINS THIS ROUND! 🤖";
 
         rpsBobScore++;
     }
 
 
+    // --------------------------------------------------------
+    // DISPLAY RESULT
+    // --------------------------------------------------------
+
     document.getElementById(
         "rpsResult"
     ).innerHTML =
 
-        `You chose: <strong>${playerChoice.toUpperCase()}</strong><br>
-         Bob chose: <strong>${bobChoice.toUpperCase()}</strong><br><br>
-         ${result}`;
+        `You chose:
+        <strong>${playerChoice.toUpperCase()}</strong><br>
 
+        Bob chose:
+        <strong>${bobChoice.toUpperCase()}</strong><br><br>
+
+        ${result}`;
+
+
+    // --------------------------------------------------------
+    // SCORE
+    // --------------------------------------------------------
 
     document.getElementById(
         "rpsScore"
@@ -809,6 +1354,10 @@ function playRPS(playerChoice) {
         `Bob: ${rpsBobScore} | ` +
         `Draws: ${rpsDraws}`;
 
+
+    // --------------------------------------------------------
+    // HISTORY
+    // --------------------------------------------------------
 
     document.getElementById(
         "rpsHistory"
@@ -820,23 +1369,36 @@ function playRPS(playerChoice) {
         `${result}<br>`;
 
 
+    // --------------------------------------------------------
+    // MATCH FINISHED
+    // --------------------------------------------------------
+
     if (rpsRound === 5) {
 
         let finalResult;
 
-        if (rpsPlayerScore > rpsBobScore) {
+
+        if (
+            rpsPlayerScore >
+            rpsBobScore
+        ) {
 
             finalResult =
                 "🏆 YOU WIN THE MATCH!";
 
         }
 
-        else if (rpsBobScore > rpsPlayerScore) {
+
+        else if (
+            rpsBobScore >
+            rpsPlayerScore
+        ) {
 
             finalResult =
                 "🤖 BOB WINS THE MATCH!";
 
         }
+
 
         else {
 
@@ -854,16 +1416,26 @@ function playRPS(playerChoice) {
         document.getElementById(
             "rpsResult"
         ).innerHTML +=
-            `<br><br>
-            <strong>${finalResult}</strong><br>
-            Final Score: ${rpsPlayerScore} - ${rpsBobScore}`;
+
+            `<br>
+            <strong>${finalResult}</strong>
+            <br><br>
+            Final Score:
+            You ${rpsPlayerScore}
+            -
+            Bob ${rpsBobScore}`;
 
 
         return;
     }
 
 
+    // --------------------------------------------------------
+    // NEXT ROUND
+    // --------------------------------------------------------
+
     rpsRound++;
+
 
     document.getElementById(
         "rpsRound"
@@ -886,13 +1458,21 @@ function getJoke() {
 
         "There are 10 kinds of people: those who understand binary and those who don't.",
 
-        "Why did the programmer quit his job? Because he didn't get arrays! 😂"
+        "Why did the programmer quit his job? Because he didn't get arrays! 😂",
+
+        "A SQL query walks into a bar and asks: Can I JOIN you? 😂",
+
+        "Why do programmers hate nature? It has too many bugs! 🐛",
+
+        "Why did the computer go to the doctor? It had a virus! 😂"
 
     ];
 
+
     return jokes[
         Math.floor(
-            Math.random() * jokes.length
+            Math.random() *
+            jokes.length
         )
     ];
 }
@@ -914,6 +1494,7 @@ function dice() {
             Math.random() * 6
         ) + 1;
 
+
     document.getElementById(
         "funResult"
     ).textContent =
@@ -927,6 +1508,7 @@ function coin() {
         Math.random() < 0.5
             ? "Heads"
             : "Tails";
+
 
     document.getElementById(
         "funResult"
@@ -942,6 +1524,7 @@ function randomNumber() {
             Math.random() * 100
         ) + 1;
 
+
     document.getElementById(
         "funResult"
     ).textContent =
@@ -956,6 +1539,7 @@ function randomNumber() {
 const pythonManual = {
 
     "print()": {
+
         meaning:
             "Displays output on the screen.",
 
@@ -969,7 +1553,9 @@ const pythonManual = {
             "Hello World"
     },
 
+
     "input()": {
+
         meaning:
             "Takes input from the user.",
 
@@ -983,7 +1569,9 @@ const pythonManual = {
             "Stores user input."
     },
 
+
     "variable": {
+
         meaning:
             "A name used to store a value.",
 
@@ -997,7 +1585,9 @@ const pythonManual = {
             "Bob"
     },
 
+
     "string": {
+
         meaning:
             "Text data.",
 
@@ -1011,7 +1601,9 @@ const pythonManual = {
             "Bob"
     },
 
+
     "integer": {
+
         meaning:
             "A whole number.",
 
@@ -1025,7 +1617,9 @@ const pythonManual = {
             "20"
     },
 
+
     "float": {
+
         meaning:
             "A decimal number.",
 
@@ -1039,7 +1633,9 @@ const pythonManual = {
             "99.99"
     },
 
+
     "boolean": {
+
         meaning:
             "True or False value.",
 
@@ -1053,7 +1649,9 @@ const pythonManual = {
             "True"
     },
 
+
     "list": {
+
         meaning:
             "An ordered collection of values.",
 
@@ -1067,7 +1665,9 @@ const pythonManual = {
             "Stores multiple values."
     },
 
+
     "dictionary": {
+
         meaning:
             "Stores key-value pairs.",
 
@@ -1081,7 +1681,9 @@ const pythonManual = {
             "name → Bob"
     },
 
+
     "if": {
+
         meaning:
             "Runs code when a condition is true.",
 
@@ -1095,7 +1697,9 @@ const pythonManual = {
             "Adult"
     },
 
+
     "elif": {
+
         meaning:
             "Checks another condition.",
 
@@ -1109,7 +1713,9 @@ const pythonManual = {
             "Teen"
     },
 
+
     "else": {
+
         meaning:
             "Runs when previous conditions are false.",
 
@@ -1123,7 +1729,9 @@ const pythonManual = {
             "Child"
     },
 
+
     "for": {
+
         meaning:
             "Repeats code over a sequence.",
 
@@ -1137,7 +1745,9 @@ const pythonManual = {
             "0 1 2 3 4"
     },
 
+
     "while": {
+
         meaning:
             "Repeats while a condition is true.",
 
@@ -1151,7 +1761,9 @@ const pythonManual = {
             "Repeats until condition becomes false."
     },
 
+
     "function": {
+
         meaning:
             "A reusable block of code.",
 
@@ -1165,7 +1777,9 @@ const pythonManual = {
             "Creates a function."
     },
 
+
     "return": {
+
         meaning:
             "Sends a value back from a function.",
 
@@ -1179,7 +1793,9 @@ const pythonManual = {
             "Returns the result."
     },
 
+
     "import": {
+
         meaning:
             "Loads a Python module.",
 
@@ -1193,7 +1809,9 @@ const pythonManual = {
             "Makes the module available."
     },
 
+
     "try": {
+
         meaning:
             "Attempts code that might cause an error.",
 
@@ -1207,7 +1825,9 @@ const pythonManual = {
             "Attempts the operation."
     },
 
+
     "except": {
+
         meaning:
             "Handles an error.",
 
@@ -1221,7 +1841,9 @@ const pythonManual = {
             "Handles the error."
     },
 
+
     "class": {
+
         meaning:
             "A blueprint for creating objects.",
 
@@ -1235,7 +1857,9 @@ const pythonManual = {
             "Creates a class."
     },
 
+
     "object": {
+
         meaning:
             "An instance of a class.",
 
@@ -1249,7 +1873,9 @@ const pythonManual = {
             "Creates an object."
     },
 
+
     "len()": {
+
         meaning:
             "Returns the length of something.",
 
@@ -1263,7 +1889,9 @@ const pythonManual = {
             "5"
     },
 
+
     "range()": {
+
         meaning:
             "Generates a sequence of numbers.",
 
@@ -1277,7 +1905,9 @@ const pythonManual = {
             "0, 1, 2, 3, 4"
     },
 
+
     "type()": {
+
         meaning:
             "Returns the type of a value.",
 
@@ -1291,7 +1921,9 @@ const pythonManual = {
             "<class 'int'>"
     },
 
+
     "int()": {
+
         meaning:
             "Converts a value to an integer.",
 
@@ -1305,7 +1937,9 @@ const pythonManual = {
             "25"
     },
 
+
     "float()": {
+
         meaning:
             "Converts a value to a floating point number.",
 
@@ -1319,7 +1953,9 @@ const pythonManual = {
             "3.14"
     },
 
+
     "str()": {
+
         meaning:
             "Converts a value to a string.",
 
@@ -1335,6 +1971,10 @@ const pythonManual = {
 };
 
 
+// ------------------------------------------------------------
+// LOAD PYTHON MANUAL
+// ------------------------------------------------------------
+
 function loadManual() {
 
     const list =
@@ -1342,31 +1982,58 @@ function loadManual() {
             "manualList"
         );
 
+
+    if (!list) {
+        return;
+    }
+
+
+    list.innerHTML = "";
+
+
     Object.keys(
         pythonManual
     ).forEach(term => {
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
+
 
         button.className =
             "manual-button";
 
+
         button.textContent =
             term;
 
-        button.onclick = () =>
-            showManual(term);
 
-        list.appendChild(button);
+        button.onclick =
+            () => showManual(term);
+
+
+        list.appendChild(
+            button
+        );
     });
 }
 
+
+// ------------------------------------------------------------
+// SHOW PYTHON TERM
+// ------------------------------------------------------------
 
 function showManual(term) {
 
     const info =
         pythonManual[term];
+
+
+    if (!info) {
+        return;
+    }
+
 
     document.getElementById(
         "manualInfo"
@@ -1375,15 +2042,19 @@ function showManual(term) {
         `<h2>${term}</h2>
 
         <h3>Meaning</h3>
+
         <p>${info.meaning}</p>
 
         <h3>Syntax</h3>
+
         <pre>${info.syntax}</pre>
 
         <h3>Example</h3>
+
         <pre>${info.example}</pre>
 
         <h3>Output / Result</h3>
+
         <pre>${info.output}</pre>`;
 }
 
@@ -1392,9 +2063,12 @@ loadManual();
 
 
 // ============================================================
-// START
+// START APPLICATION
 // ============================================================
 
-startGuessGame();
-startRPS();
 showPage("home");
+
+
+// Start a new RPS match when page loads
+
+startRPS();
