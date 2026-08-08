@@ -1,494 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Bob - Python Personal Assistant</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bob - Programming Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="app">
 
-    <!-- SIDEBAR -->
-
     <aside class="sidebar">
+        <div class="logo">🤖 BOB</div>
+        <div class="logo-subtitle">Programming Assistant</div>
 
-        <div class="logo">
-            🤖 BOB
-        </div>
-
-        <button onclick="showPage('home')">
-            🏠 Home
-        </button>
-
-        <button onclick="showPage('chat')">
-            💬 Chat
-        </button>
-
-        <button onclick="showPage('calculator')">
-            🧮 Calculator
-        </button>
-
-        <button onclick="showPage('datetime')">
-            📅 Date & Time
-        </button>
-
-        <button onclick="showPage('converter')">
-            🔄 Converter
-        </button>
-
-        <button onclick="showPage('memory')">
-            🧠 Memory
-        </button>
-
-        <button onclick="showPage('notes')">
-            📝 Notes
-        </button>
-
-        <button onclick="showPage('todo')">
-            ✅ To-Do
-        </button>
-
-        <button onclick="showPage('games')">
-            🎮 Games
-        </button>
-
-        <button onclick="showPage('fun')">
-            😂 Fun
-        </button>
-
-        <button onclick="showPage('manual')">
-            🐍 Python Manual
-        </button>
-
-        <button onclick="showPage('help')">
-            ❓ Help
-        </button>
-
+        <button onclick="showPage('home')">🏠 Home</button>
+        <button onclick="showPage('chat')">💬 Chat</button>
+        <button onclick="showPage('calculator')">🧮 Calculator</button>
+        <button onclick="showPage('datetime')">📅 Date & Time</button>
+        <button onclick="showPage('converter')">🔄 Converter</button>
+        <button onclick="showPage('memory')">🧠 Memory</button>
+        <button onclick="showPage('notes')">📝 Notes</button>
+        <button onclick="showPage('todo')">✅ To-Do</button>
+        <button onclick="showPage('games')">🎮 Games</button>
+        <button onclick="showPage('fun')">😂 Fun</button>
+        <button onclick="showPage('manual')">📚 Programming Manual</button>
+        <button onclick="showPage('help')">❓ Help</button>
     </aside>
-
-
-    <!-- MAIN CONTENT -->
 
     <main class="content">
 
-
-        <!-- HOME -->
-
         <section id="home" class="page active">
-
-            <h1>🤖 Bob</h1>
-
-            <h2>Python Personal Assistant</h2>
-
-            <p>
-                Welcome! Choose something from the menu.
-            </p>
-
+            <div class="hero">
+                <div class="hero-icon">🤖</div>
+                <h1>Welcome to Bob</h1>
+                <h2>Programming Assistant</h2>
+                <p>Learn, calculate, play games, save notes and explore programming languages.</p>
+                <div class="feature-grid">
+                    <button onclick="showPage('chat')">💬 Chat</button>
+                    <button onclick="showPage('manual')">📚 Learn Code</button>
+                    <button onclick="showPage('calculator')">🧮 Calculate</button>
+                    <button onclick="showPage('games')">🎮 Play Games</button>
+                </div>
+            </div>
         </section>
-
-
-        <!-- CHAT -->
 
         <section id="chat" class="page">
-
             <h1>💬 Chat with Bob</h1>
 
-            <div
-                id="chatOutput"
-                class="chat-output"
-            ></div>
+            <div class="quick-responses">
+                <button onclick="quickChat('hello')">👋 Hello</button>
+                <button onclick="quickChat('how are you')">😊 How are you?</button>
+                <button onclick="quickChat('who are you')">🤖 Who are you?</button>
+                <button onclick="quickChat('tell me a joke')">😂 Tell me a joke</button>
+                <button onclick="quickChat('what is the time')">🕐 Time</button>
+                <button onclick="quickChat('what is the date')">📅 Date</button>
+                <button onclick="quickChat('do you like python')">🐍 Python?</button>
+                <button onclick="quickChat('what can you do')">⚡ What can you do?</button>
+                <button onclick="quickChat('thanks')">❤️ Thanks</button>
+                <button onclick="quickChat('i am bored')">😴 I'm bored</button>
+                <button onclick="quickChat('good morning')">☀️ Good morning</button>
+                <button onclick="quickChat('good night')">🌙 Good night</button>
+            </div>
+
+            <div id="chatOutput" class="chat-output">
+                <div class="bot-message"><strong>Bob:</strong> Hi! I'm Bob. Ask me something or use a quick button. 👋</div>
+            </div>
 
             <div class="chat-input">
-
-                <input
-                    id="chatInput"
-                    placeholder="Talk to Bob..."
-                    onkeydown="if(event.key === 'Enter') sendChat()"
-                >
-
-                <button onclick="sendChat()">
-                    Send
-                </button>
-
+                <input id="chatInput" placeholder="Talk to Bob..." onkeydown="if(event.key === 'Enter') sendChat()">
+                <button onclick="sendChat()">Send</button>
             </div>
-
         </section>
-
-
-        <!-- CALCULATOR -->
 
         <section id="calculator" class="page">
-
             <h1>🧮 Calculator</h1>
-
-            <div class="calculator">
-
-                <input
-                    id="num1"
-                    type="number"
-                    placeholder="First number"
-                >
-
-                <select id="operation">
-
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                    <option value="*">*</option>
-                    <option value="/">/</option>
-                    <option value="%">%</option>
-                    <option value="//">//</option>
-                    <option value="**">Power</option>
-
-                </select>
-
-                <input
-                    id="num2"
-                    type="number"
-                    placeholder="Second number"
-                >
-
-                <button onclick="calculate()">
-                    Calculate
-                </button>
-
+            <div class="card">
+                <div class="calculator">
+                    <input id="num1" type="number" placeholder="First number">
+                    <select id="operation">
+                        <option value="+">+</option>
+                        <option value="-">−</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                        <option value="%">%</option>
+                        <option value="//">//</option>
+                        <option value="**">Power</option>
+                    </select>
+                    <input id="num2" type="number" placeholder="Second number">
+                    <button onclick="calculate()">Calculate</button>
+                </div>
+                <h2 id="calcResult">Result will appear here.</h2>
             </div>
-
-            <h2 id="calcResult">
-                Result will appear here.
-            </h2>
-
         </section>
-
-
-        <!-- DATE TIME -->
 
         <section id="datetime" class="page">
-
             <h1>📅 Date & Time</h1>
-
-            <div
-                id="clock"
-                class="clock"
-            ></div>
-
+            <div class="card center">
+                <div id="clock" class="clock"></div>
+            </div>
         </section>
-
-
-        <!-- CONVERTER -->
 
         <section id="converter" class="page">
-
             <h1>🔄 Unit Converter</h1>
-
-            <select id="conversion">
-
-                <option value="km-miles">
-                    Kilometers → Miles
-                </option>
-
-                <option value="miles-km">
-                    Miles → Kilometers
-                </option>
-
-                <option value="kg-lb">
-                    Kilograms → Pounds
-                </option>
-
-                <option value="lb-kg">
-                    Pounds → Kilograms
-                </option>
-
-                <option value="c-f">
-                    Celsius → Fahrenheit
-                </option>
-
-                <option value="f-c">
-                    Fahrenheit → Celsius
-                </option>
-
-            </select>
-
-            <input
-                id="conversionValue"
-                type="number"
-                placeholder="Enter value"
-            >
-
-            <button onclick="convertUnits()">
-                Convert
-            </button>
-
-            <h2 id="conversionResult">
-                Result
-            </h2>
-
+            <div class="card">
+                <select id="conversion">
+                    <option value="km-miles">Kilometers → Miles</option>
+                    <option value="miles-km">Miles → Kilometers</option>
+                    <option value="kg-lb">Kilograms → Pounds</option>
+                    <option value="lb-kg">Pounds → Kilograms</option>
+                    <option value="c-f">Celsius → Fahrenheit</option>
+                    <option value="f-c">Fahrenheit → Celsius</option>
+                </select>
+                <input id="conversionValue" type="number" placeholder="Enter value">
+                <button onclick="convertUnits()">Convert</button>
+                <h2 id="conversionResult">Result</h2>
+            </div>
         </section>
-
-
-        <!-- MEMORY -->
 
         <section id="memory" class="page">
-
             <h1>🧠 Memory</h1>
+            <div class="card">
+                <h3>Your name</h3>
+                <input id="nameInput" placeholder="Your name">
+                <button onclick="saveName()">Save Name</button>
 
-            <input
-                id="nameInput"
-                placeholder="Your name"
-            >
+                <h3>Things Bob should remember</h3>
+                <input id="memoryInput" placeholder="Something to remember">
+                <button onclick="addMemory()">Remember</button>
 
-            <button onclick="saveName()">
-                Save Name
-            </button>
-
-            <hr>
-
-            <input
-                id="memoryInput"
-                placeholder="Something Bob should remember"
-            >
-
-            <button onclick="addMemory()">
-                Remember
-            </button>
-
-            <ul id="memoryList"></ul>
-
-            <button onclick="clearMemory()">
-                Clear Memory
-            </button>
-
+                <ul id="memoryList"></ul>
+                <button class="danger" onclick="clearMemory()">Clear Memory</button>
+            </div>
         </section>
-
-
-        <!-- NOTES -->
 
         <section id="notes" class="page">
-
             <h1>📝 Notes</h1>
-
-            <input
-                id="noteInput"
-                placeholder="Write a note..."
-            >
-
-            <button onclick="addNote()">
-                Add Note
-            </button>
-
-            <ul id="notesList"></ul>
-
+            <div class="card">
+                <input id="noteInput" placeholder="Write a note...">
+                <button onclick="addNote()">Add Note</button>
+                <ul id="notesList"></ul>
+            </div>
         </section>
-
-
-        <!-- TODO -->
 
         <section id="todo" class="page">
-
             <h1>✅ To-Do List</h1>
-
-            <input
-                id="taskInput"
-                placeholder="New task..."
-            >
-
-            <button onclick="addTask()">
-                Add Task
-            </button>
-
-            <ul id="taskList"></ul>
-
+            <div class="card">
+                <input id="taskInput" placeholder="New task..." onkeydown="if(event.key === 'Enter') addTask()">
+                <button onclick="addTask()">Add Task</button>
+                <ul id="taskList"></ul>
+            </div>
         </section>
-
-
-        <!-- GAMES -->
 
         <section id="games" class="page">
-
             <h1>🎮 Games</h1>
 
-            <div class="game-buttons">
-
-                <button onclick="startGuessGame()">
-                    🎯 Number Guessing
-                </button>
-
-                <button onclick="startRPS()">
-                    ✊ Rock Paper Scissors
-                </button>
-
+            <div class="game-tabs">
+                <button onclick="showGame('guessGame')">🎯 Number Guessing</button>
+                <button onclick="showGame('rpsGame')">✊ Rock Paper Scissors</button>
             </div>
 
-
-            <!-- GUESSING GAME -->
-
-            <div id="guessGame">
-
-                <h2>🎯 Number Guessing</h2>
-
-                <p>
-                    Guess a number between 1 and 100.
-                </p>
-
-                <input
-                    id="guessInput"
-                    type="number"
-                >
-
-                <button onclick="makeGuess()">
-                    Guess
-                </button>
-
-                <p id="guessResult"></p>
-
-            </div>
-
-
-            <!-- RPS -->
-
-            <div id="rpsGame">
-
-                <h2>✊ Rock Paper Scissors</h2>
-
-                <h3 id="rpsRound">
-                    Round 1 / 5
-                </h3>
-
-                <div class="rps-buttons">
-
-                    <button onclick="playRPS('rock')">
-                        ✊ Rock
-                    </button>
-
-                    <button onclick="playRPS('paper')">
-                        📄 Paper
-                    </button>
-
-                    <button onclick="playRPS('scissors')">
-                        ✌️ Scissors
-                    </button>
-
+            <div id="guessGame" class="game-panel">
+                <h2>🎯 Number Guessing Game</h2>
+                <p>I'm thinking of a number between <strong>1 and 100</strong>.</p>
+                <button onclick="startGuessGame()">🎮 Start New Game</button>
+                <div class="game-input">
+                    <input id="guessInput" type="number" min="1" max="100" placeholder="Enter your guess"
+                           onkeydown="if(event.key === 'Enter') makeGuess()">
+                    <button onclick="makeGuess()">Guess</button>
                 </div>
-
-                <h3 id="rpsResult">
-                    Choose your move!
-                </h3>
-
-                <p id="rpsScore">
-                    You: 0 | Bob: 0 | Draws: 0
-                </p>
-
-                <div id="rpsHistory"></div>
-
-                <button onclick="startRPS()">
-                    🔄 New Match
-                </button>
-
+                <h3 id="guessResult">Click "Start New Game" to begin.</h3>
+                <p id="guessAttempts">Attempts: 0</p>
+                <div class="hint-box">
+                    🔥 1–5 away = Very Close<br>
+                    🟡 6–10 away = Near<br>
+                    ⬆️⬇️ More than 10 away = Too High / Too Low
+                </div>
             </div>
 
+            <div id="rpsGame" class="game-panel hidden">
+                <h2>✊ Rock Paper Scissors</h2>
+                <h3 id="rpsRound">Round 1 / 5</h3>
+                <div class="rps-buttons">
+                    <button onclick="playRPS('rock')">✊ Rock</button>
+                    <button onclick="playRPS('paper')">📄 Paper</button>
+                    <button onclick="playRPS('scissors')">✌️ Scissors</button>
+                </div>
+                <h3 id="rpsResult">Choose your move!</h3>
+                <p id="rpsScore">You: 0 | Bob: 0 | Draws: 0</p>
+                <div id="rpsHistory" class="history"></div>
+                <button onclick="startRPS()">🔄 New Match</button>
+            </div>
         </section>
-
-
-        <!-- FUN -->
 
         <section id="fun" class="page">
-
             <h1>😂 Fun & Random</h1>
-
-            <button onclick="joke()">
-                😂 Joke
-            </button>
-
-            <button onclick="dice()">
-                🎲 Dice
-            </button>
-
-            <button onclick="coin()">
-                🪙 Coin
-            </button>
-
-            <button onclick="randomNumber()">
-                🔢 Random Number
-            </button>
-
-            <h2 id="funResult"></h2>
-
+            <div class="card fun-buttons">
+                <button onclick="joke()">😂 Joke</button>
+                <button onclick="dice()">🎲 Dice</button>
+                <button onclick="coin()">🪙 Coin</button>
+                <button onclick="randomNumber()">🔢 Random Number</button>
+                <h2 id="funResult">Choose something!</h2>
+            </div>
         </section>
-
-
-        <!-- PYTHON MANUAL -->
 
         <section id="manual" class="page">
+            <h1>📚 Programming Manual</h1>
+            <p>Learn the basics of popular programming and web languages.</p>
 
-            <h1>🐍 Python Manual</h1>
+            <div class="language-buttons" id="languageButtons"></div>
 
-            <div class="manual">
-
-                <div id="manualList"></div>
-
-                <div
-                    id="manualInfo"
-                    class="manual-info"
-                >
-                    Select a Python term.
+            <div class="manual-layout">
+                <div id="manualList" class="manual-list"></div>
+                <div id="manualInfo" class="manual-info">
+                    Select a language and a topic.
                 </div>
-
             </div>
-
         </section>
 
-
-        <!-- HELP -->
-
         <section id="help" class="page">
-
             <h1>❓ Help</h1>
+            <div class="card help">
+                <h2>🤖 About Bob</h2>
+                <p>Bob is a programming assistant and learning project.</p>
 
-            <div class="help">
-
-                <h2>Bob - Python Personal Assistant</h2>
-
-                <p>
-                    Bob is a Python learning project converted
-                    into a web application.
-                </p>
-
-                <h3>Features</h3>
-
+                <h3>Available features</h3>
                 <ul>
-
-                    <li>Chat</li>
+                    <li>Chat with quick responses</li>
                     <li>Calculator</li>
-                    <li>Date & Time</li>
-                    <li>Unit Converter</li>
+                    <li>Live date and time</li>
+                    <li>Unit converter</li>
                     <li>Memory</li>
                     <li>Notes</li>
-                    <li>To-Do List</li>
-                    <li>Games</li>
-                    <li>Fun</li>
-                    <li>Python Manual</li>
-
+                    <li>To-Do list</li>
+                    <li>Number Guessing</li>
+                    <li>Rock Paper Scissors</li>
+                    <li>Fun tools</li>
+                    <li>Programming Manual</li>
                 </ul>
 
-            </div>
+                <h3>Languages in the manual</h3>
+                <p>Python, C, C++, Java, JavaScript, HTML and CSS.</p>
 
+                <h3>Data</h3>
+                <p>Memory, notes and tasks are stored locally in your browser using LocalStorage.</p>
+            </div>
         </section>
 
     </main>
-
 </div>
 
 <script src="script.js"></script>
-
 </body>
-
 </html>
