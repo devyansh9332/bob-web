@@ -28,7 +28,11 @@ function sendChat() {
 
     const output = document.getElementById("chatOutput");
     output.innerHTML += `<div class="user-message"><strong>You:</strong> ${escapeHTML(message)}</div>`;
-    output.innerHTML += `<div class="bot-message"><strong>Bob:</strong> ${botResponse(message.toLowerCase())}</div>`;
+
+    let response = smartChatCommand(message);
+    if (!response) response = botResponse(message.toLowerCase());
+
+    output.innerHTML += `<div class="bot-message"><strong>Bob:</strong> ${escapeHTML(response)}</div>`;
     output.scrollTop = output.scrollHeight;
     input.value = "";
     input.focus();
@@ -63,6 +67,143 @@ function botResponse(message) {
     if (message.includes("manual") || message.includes("learn")) return "Open 📚 Programming Manual. You can search topics across Python, C, C++, Java, JavaScript, HTML and CSS.";
     return "I don't understand that yet. Try a quick button or ask me about programming.";
 }
+
+
+// ---------------- SMART CHAT COMMAND ROUTER ----------------
+// Bob can control his menus from the Chat screen.
+// Examples: "open calculator", "give me a joke", "roll a d20",
+// "play tic tac toe", "show Bhagavad Gita", "add todo: study DSA".
+
+function smartChatCommand(message) {
+    const m = message.toLowerCase().trim();
+
+    if (m.includes("bhagavad gita") || m.includes("gita") || m.includes("geeta") || m.includes("shloka") || m.includes("shlok")) {
+        showPage("gita");
+        randomGitaVerse();
+        return "🕉️ Opening Bhagavad Gita and showing a random shloka.";
+    }
+
+    if (m.includes("open") || m.includes("show") || m.includes("go to")) {
+        if (m.includes("manual") || m.includes("programming guide") || m.includes("learn")) {
+            showPage("manual"); return "📚 Opening the Programming Manual.";
+        }
+        if (m.includes("game")) {
+            showPage("games"); return "🎮 Opening Games.";
+        }
+        if (m.includes("fun") || m.includes("random")) {
+            showPage("fun"); return "😂 Opening Fun & Random.";
+        }
+        if (m.includes("calculator") || m.includes("calculate")) {
+            showPage("calculator"); return "🧮 Opening Calculator.";
+        }
+        if (m.includes("note")) {
+            showPage("notes"); return "📝 Opening Notes.";
+        }
+        if (m.includes("todo") || m.includes("to-do") || m.includes("task")) {
+            showPage("todo"); return "✅ Opening To-Do.";
+        }
+        if (m.includes("memory")) {
+            showPage("memory"); return "🧠 Opening Memory.";
+        }
+        if (m.includes("converter") || m.includes("convert")) {
+            showPage("converter"); return "🔄 Opening Converter.";
+        }
+    }
+
+    if (m.includes("joke")) { showPage("fun"); joke(); return "😂 Here's a joke."; }
+    if (m.includes("riddle")) { showPage("fun"); riddle(); return "🧠 Here's a riddle."; }
+    if (m.includes("fun fact")) { showPage("fun"); funFact(); return "💡 Here's a fun fact."; }
+    if (m.includes("would you rather")) { showPage("fun"); wouldYouRather(); return "🤔 Here's your choice."; }
+    if (m.includes("roast bob") || m === "roast me") { showPage("fun"); roastBob(); return "🔥 Roast incoming."; }
+    if (m.includes("compliment")) { showPage("fun"); compliment(); return "💬 Here's a compliment."; }
+    if (m.includes("magic 8") || m.includes("magic eight")) { showPage("fun"); magic8(); return "🎱 Magic 8 Ball says..."; }
+    if (m.includes("fortune")) { showPage("fun"); fortune(); return "🔮 Here's your fortune."; }
+    if (m.includes("mood")) { showPage("fun"); mood(); return "🎭 Random mood generated."; }
+    if (m.includes("coding challenge")) { showPage("fun"); codingChallenge(); return "💻 Here's your coding challenge."; }
+
+    const diceMatch = m.match(/(?:roll|throw)\s+(?:a\s+)?(?:d|dice\s+)?(\d+)/);
+    if (diceMatch) {
+        const sides = Number(diceMatch[1]);
+        if (sides >= 2 && sides <= 1000) {
+            showPage("fun"); rollDice(sides);
+            return `🎲 Rolled a d${sides}.`;
+        }
+    }
+    if (m.includes("dice")) { showPage("fun"); rollDice(6); return "🎲 Rolled a d6."; }
+    if (m.includes("coin") || m.includes("heads or tails")) { showPage("fun"); coin(); return "🪙 Coin flipped."; }
+    if (m.includes("random color")) { showPage("fun"); randomColor(); return "🎨 Random color generated."; }
+    if (m.includes("random word")) { showPage("fun"); randomWord(); return "🔠 Random word generated."; }
+    if (m.includes("random letter")) { showPage("fun"); randomLetter(); return "🔤 Random letter generated."; }
+    if (m.includes("random name")) { showPage("fun"); randomName(); return "👤 Random name generated."; }
+    if (m.includes("random date")) { showPage("fun"); randomDate(); return "📅 Random date generated."; }
+    if (m.includes("random time")) { showPage("fun"); randomTime(); return "⏱️ Random time generated."; }
+    if (m.includes("password")) { showPage("fun"); passwordGenerator(); return "🔐 Password generated locally."; }
+    if (m.includes("random choice") || m.includes("choose for me")) { showPage("fun"); randomChoice(); return "🎯 I chose for you."; }
+    if (m.includes("slot machine") || m.includes("slot")) { showPage("fun"); slotMachine(); return "🎰 Slot machine spun."; }
+
+    if (m.includes("word scramble") || m.includes("scramble")) {
+        showPage("fun"); startWordScramble(); return "🔤 Word Scramble started.";
+    }
+    if (m.includes("math challenge") || m.includes("math game")) {
+        showPage("fun"); startMathChallenge(); return "➗ Math Challenge started.";
+    }
+    if (m.includes("reaction timer") || m.includes("reaction test")) {
+        showPage("fun"); startReactionTimer(); return "⚡ Reaction Timer started.";
+    }
+    if (m.includes("tic tac toe") || m.includes("tic-tac-toe")) {
+        showPage("fun"); newTicTacToe(); return "❌ Tic-Tac-Toe started.";
+    }
+    if (m.includes("higher lower") || m.includes("higher or lower")) {
+        showPage("fun"); higherLower(); return "🃏 Higher / Lower generated.";
+    }
+    if (m.includes("color guess")) {
+        showPage("fun"); colorGuess(); return "🎨 Color Guess started.";
+    }
+    if (m.includes("heads streak") || m.includes("coin streak")) {
+        showPage("fun"); headsTailsStreak(); return "🪙 Heads streak generated.";
+    }
+
+    if (m.includes("rock paper scissors") || m === "rps") {
+        showPage("games"); showGame("rpsGame"); startRPS(); return "✊ Rock Paper Scissors started — 5 rounds.";
+    }
+    if (m.includes("number guessing") || m.includes("guess number")) {
+        showPage("games"); showGame("guessGame"); startGuessGame(); return "🎯 Number Guessing started — 1 to 100.";
+    }
+
+    if (m.includes("what time") || m === "time" || m.includes("current time")) {
+        showPage("datetime"); return `🕐 It's ${new Date().toLocaleTimeString("en-IN")}.`;
+    }
+    if (m.includes("what date") || m === "date" || m.includes("today date")) {
+        showPage("datetime"); return `📅 Today is ${new Date().toLocaleDateString("en-IN")}.`;
+    }
+
+    const noteMatch = message.match(/^(?:add|save|write)\s+(?:a\s+)?note(?:\s*[:\-]\s*|\s+)(.+)$/i);
+    if (noteMatch) {
+        document.getElementById("noteInput").value = noteMatch[1].trim();
+        addNote(); showPage("notes");
+        return `📝 Saved note: "${noteMatch[1].trim()}"`;
+    }
+
+    const todoMatch = message.match(/^(?:add|create)\s+(?:a\s+)?(?:todo|to-do|task)(?:\s*[:\-]\s*|\s+)(.+)$/i);
+    if (todoMatch) {
+        document.getElementById("taskInput").value = todoMatch[1].trim();
+        addTask(); showPage("todo");
+        return `✅ Added task: "${todoMatch[1].trim()}"`;
+    }
+
+    // Manual search from Chat: "explain python print" / "teach me css flex"
+    const learnMatch = message.match(/^(?:explain|teach me|what is|what does)\s+(?:(python|c\+\+|c|java|javascript|html|css)\s+)?(.+)$/i);
+    if (learnMatch && document.getElementById("manualSearch")) {
+        showPage("manual");
+        const term = learnMatch[2].trim();
+        document.getElementById("manualSearch").value = term;
+        filterManual();
+        return `📚 Searching the Programming Manual for "${term}".`;
+    }
+
+    return null;
+}
+
 
 // ---------------- CALCULATOR ----------------
 

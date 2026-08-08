@@ -23,6 +23,7 @@
         <button onclick="showPage('todo')">✅ To-Do</button>
         <button onclick="showPage('games')">🎮 Games</button>
         <button onclick="showPage('fun')">😂 Fun</button>
+        <button onclick="showPage('gita')">🕉️ Bhagavad Gita</button>
         <button onclick="showPage('manual')">📚 Programming Manual</button>
         <button onclick="showPage('help')">❓ Help</button>
     </aside>
@@ -51,6 +52,7 @@
                 <button onclick="quickChat('who are you')">🤖 Who are you?</button>
                 <button onclick="quickChat('tell me a joke')">😂 Tell me a joke</button>
                 <button onclick="quickChat('what is the time')">🕐 Time</button>
+                <button onclick="quickChat('Bhagavad Gita')">🕉️ Bhagavad Gita</button>
                 <button onclick="quickChat('what is the date')">📅 Date</button>
                 <button onclick="quickChat('do you like python')">🐍 Python?</button>
                 <button onclick="quickChat('what can you do')">⚡ What can you do?</button>
@@ -221,19 +223,7 @@
         <h2>🎉 Pick something!</h2>
         <p>Your result will appear here.</p>
     </div>
-
-    <div class="gita-card">
-        <div class="gita-symbol">ॐ</div>
-        <h2>🕉️ Random Bhagavad Gita Shloka</h2>
-        <p class="muted">A random verse from a growing local collection. The original Sanskrit is public-domain; translations can have separate copyrights.</p>
-        <button onclick="randomGitaVerse()">📖 Show Random Shloka</button>
-        <a class="secondary-btn" href="https://www.bhagvadgita.in/" target="_blank" rel="noopener">📚 Browse All 700 Verses</a>
-        <div id="gitaResult" class="gita-result">
-            <p>Click the button to receive a verse.</p>
-        </div>
-    </div>
-
-    <div class="mini-game card">
+<div class="mini-game card">
         <h2>🔤 Word Scramble</h2>
         <p id="scrambleWord">Click Start.</p>
         <button onclick="startWordScramble()">Start</button>
@@ -283,6 +273,29 @@
                     <div id="manualList" class="manual-list"></div>
                 </div>
                 <div id="manualInfo" class="manual-info">Select a language and a topic.</div>
+            </div>
+        </section>
+
+        
+        <section id="gita" class="page">
+            <h1>🕉️ Bhagavad Gita</h1>
+            <p>Explore Bhagavad Gita verses with chapter references, Sanskrit text and simple explanations.</p>
+
+            <div class="gita-card standalone-gita">
+                <div class="gita-symbol">ॐ</div>
+                <h2>Bhagavad Gita — Random Shloka</h2>
+                <p class="muted">Choose a random verse from the local collection. The Sanskrit text is presented with a concise, original explanation.</p>
+                <button onclick="randomGitaVerse()">📖 Show Random Shloka</button>
+                <a class="secondary-btn" href="https://www.bhagavad-gita.org/" target="_blank" rel="noopener">📚 Read Bhagavad Gita Online</a>
+                <div id="gitaResult" class="gita-result">
+                    <p>Click “Show Random Shloka” to begin.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📜 About Bhagavad Gita</h2>
+                <p><strong>Bhagavad Gita</strong> is a 700-verse dialogue between Arjuna and Krishna in the Mahabharata. It is traditionally organized into 18 chapters.</p>
+                <p class="muted">This app's local collection is intentionally concise. The online button provides access to the complete text.</p>
             </div>
         </section>
 
