@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Bob - Programming Assistant">
     <title>Bob - Programming Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="app">
-
     <aside class="sidebar">
         <div class="logo">🤖 BOB</div>
         <div class="logo-subtitle">Programming Assistant</div>
@@ -29,13 +28,12 @@
     </aside>
 
     <main class="content">
-
         <section id="home" class="page active">
             <div class="hero">
                 <div class="hero-icon">🤖</div>
                 <h1>Welcome to Bob</h1>
                 <h2>Programming Assistant</h2>
-                <p>Learn, calculate, play games, save notes and explore programming languages.</p>
+                <p>Chat, calculate, save notes, play games and learn programming languages.</p>
                 <div class="feature-grid">
                     <button onclick="showPage('chat')">💬 Chat</button>
                     <button onclick="showPage('manual')">📚 Learn Code</button>
@@ -47,7 +45,6 @@
 
         <section id="chat" class="page">
             <h1>💬 Chat with Bob</h1>
-
             <div class="quick-responses">
                 <button onclick="quickChat('hello')">👋 Hello</button>
                 <button onclick="quickChat('how are you')">😊 How are you?</button>
@@ -62,11 +59,9 @@
                 <button onclick="quickChat('good morning')">☀️ Good morning</button>
                 <button onclick="quickChat('good night')">🌙 Good night</button>
             </div>
-
             <div id="chatOutput" class="chat-output">
                 <div class="bot-message"><strong>Bob:</strong> Hi! I'm Bob. Ask me something or use a quick button. 👋</div>
             </div>
-
             <div class="chat-input">
                 <input id="chatInput" placeholder="Talk to Bob..." onkeydown="if(event.key === 'Enter') sendChat()">
                 <button onclick="sendChat()">Send</button>
@@ -96,9 +91,7 @@
 
         <section id="datetime" class="page">
             <h1>📅 Date & Time</h1>
-            <div class="card center">
-                <div id="clock" class="clock"></div>
-            </div>
+            <div class="card center"><div id="clock" class="clock"></div></div>
         </section>
 
         <section id="converter" class="page">
@@ -124,11 +117,9 @@
                 <h3>Your name</h3>
                 <input id="nameInput" placeholder="Your name">
                 <button onclick="saveName()">Save Name</button>
-
                 <h3>Things Bob should remember</h3>
                 <input id="memoryInput" placeholder="Something to remember">
                 <button onclick="addMemory()">Remember</button>
-
                 <ul id="memoryList"></ul>
                 <button class="danger" onclick="clearMemory()">Clear Memory</button>
             </div>
@@ -154,7 +145,6 @@
 
         <section id="games" class="page">
             <h1>🎮 Games</h1>
-
             <div class="game-tabs">
                 <button onclick="showGame('guessGame')">🎯 Number Guessing</button>
                 <button onclick="showGame('rpsGame')">✊ Rock Paper Scissors</button>
@@ -171,11 +161,7 @@
                 </div>
                 <h3 id="guessResult">Click "Start New Game" to begin.</h3>
                 <p id="guessAttempts">Attempts: 0</p>
-                <div class="hint-box">
-                    🔥 1–5 away = Very Close<br>
-                    🟡 6–10 away = Near<br>
-                    ⬆️⬇️ More than 10 away = Too High / Too Low
-                </div>
+                <div class="hint-box">🔥 1–5 away = Very Close<br>🟡 6–10 away = Near<br>⬆️⬇️ More than 10 away = Too High / Too Low</div>
             </div>
 
             <div id="rpsGame" class="game-panel hidden">
@@ -206,15 +192,21 @@
 
         <section id="manual" class="page">
             <h1>📚 Programming Manual</h1>
-            <p>Learn the basics of popular programming and web languages.</p>
+            <p>Search and learn practical syntax, concepts, methods, tags and properties.</p>
+
+            <div class="manual-toolbar">
+                <input id="manualSearch" class="manual-search" placeholder="🔍 Search print, vector, flex, array..." oninput="filterManual()">
+                <button onclick="clearManualSearch()">Clear</button>
+            </div>
 
             <div class="language-buttons" id="languageButtons"></div>
 
             <div class="manual-layout">
-                <div id="manualList" class="manual-list"></div>
-                <div id="manualInfo" class="manual-info">
-                    Select a language and a topic.
+                <div class="manual-list-wrap">
+                    <div class="manual-category" id="manualCategory"></div>
+                    <div id="manualList" class="manual-list"></div>
                 </div>
+                <div id="manualInfo" class="manual-info">Select a language and a topic.</div>
             </div>
         </section>
 
@@ -222,34 +214,22 @@
             <h1>❓ Help</h1>
             <div class="card help">
                 <h2>🤖 About Bob</h2>
-                <p>Bob is a programming assistant and learning project.</p>
-
-                <h3>Available features</h3>
+                <p>Bob is a browser-based programming assistant and learning project.</p>
+                <h3>Features</h3>
                 <ul>
                     <li>Chat with quick responses</li>
-                    <li>Calculator</li>
-                    <li>Live date and time</li>
-                    <li>Unit converter</li>
-                    <li>Memory</li>
-                    <li>Notes</li>
-                    <li>To-Do list</li>
-                    <li>Number Guessing</li>
-                    <li>Rock Paper Scissors</li>
-                    <li>Fun tools</li>
-                    <li>Programming Manual</li>
+                    <li>Calculator, date/time and converter</li>
+                    <li>Memory, notes and To-Do list</li>
+                    <li>Number Guessing and 5-round Rock Paper Scissors</li>
+                    <li>Programming reference with search</li>
                 </ul>
-
-                <h3>Languages in the manual</h3>
+                <h3>Manual languages</h3>
                 <p>Python, C, C++, Java, JavaScript, HTML and CSS.</p>
-
-                <h3>Data</h3>
-                <p>Memory, notes and tasks are stored locally in your browser using LocalStorage.</p>
+                <p class="muted">The manual is an original practical reference, not a copy of official specifications.</p>
             </div>
         </section>
-
     </main>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>
